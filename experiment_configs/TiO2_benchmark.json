@@ -1,0 +1,75 @@
+{
+  "system_name": "TiO2",
+  "blocks": [
+    22,
+    22,
+    22,
+    22,
+    22,
+    22,
+    22,
+    22,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8
+  ],
+  "volume": 450,
+  "ratio_of_covalent_radii": 0.4,
+  "splits": "DUMMY",
+  "cellbounds": "DUMMY",
+  "operator_probabilities": [
+    0.0,
+    0,
+    5.0,
+    5.0
+  ],
+  "n_behavioural_descriptor_dimensions": 2,
+  "number_of_niches": 200,
+  "maximum_evaluations": 5000,
+  "experiment_tag": "benchmark_1_1",
+  "fitness_min_max_values": [
+    8.7,
+    9.5
+  ],
+  "filter_comparison_data_for_n_atoms": 24,
+  "start_generator": "pyxtal",
+  "cvt_run_parameters": {
+    "cvt_samples": 25000,
+    "batch_size": 100,
+    "random_init": 0.1,
+    "random_init_batch": 20,
+    "dump_period": 200,
+    "parallel": true,
+    "cvt_use_cache": true,
+    "bd_minimum_values": [
+      0,
+      0
+    ],
+    "bd_maximum_values": [
+      4,
+      120
+    ],
+    "relaxation_probability": 0,
+    "behavioural_descriptors": [
+      "band_gap",
+      "shear_modulus"
+    ],
+    "number_of_relaxation_steps": 100,
+    "filter_starting_structures": 24,
+    "force_threshold": false,
+    "normalise_bd": true
+  }
+}
