@@ -90,7 +90,7 @@ if __name__ == '__main__':
 ### Using the package
 To run a demo experiment run:
 ```shell
- python3 scripts/experiments/experiment_from_config.py experiment_configs/demo.json
+ python3 scripts/experiment_from_config.py experiment_configs/demo.json
 ```
 This will run a very simple demo with 2 TiO2 structures. All results will be saved under the `experiments_folder`.
 
@@ -145,10 +145,10 @@ python3 scripts/prepare_reference_data.py
 
 ### [Optional] Setting up environment variables
 This repo relies on 4 environment variables:
-* EXPERIMENT_FOLDER
-* MP_REFERENCE_FOLDER
-* CONFIGS_FOLDER
-* MP_API_KEY
+* `EXPERIMENT_FOLDER`
+* `MP_REFERENCE_FOLDER`
+* `CONFIGS_FOLDER`
+* `MP_API_KEY`
 
 The former 3 are set up with defaults to save the experiments in the following structure:
 ```shell
