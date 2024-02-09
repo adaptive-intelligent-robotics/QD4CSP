@@ -313,7 +313,7 @@ class ReferenceAnalyser:
             df.columns = df.iloc[0]
             df = df[1:]
             df = df.reset_index(drop=True)
-            df.index = ["energy", "band_gap", "shear_modulus", "fmax", "centroid_id"] #todo: remove centroid_id
+            df.index = ["energy", "band_gap", "shear_modulus", "fmax", "centroid_id"]
             df.to_csv(self.save_path / filename)
 
         return target_archive
