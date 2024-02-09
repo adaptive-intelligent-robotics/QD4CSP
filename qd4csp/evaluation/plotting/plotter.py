@@ -55,11 +55,14 @@ class CVTPlotting:
         for i, region in enumerate(self.regions):
             polygon = self.vertices[region]
             ax.fill(
-                *zip(*polygon), alpha=0.05, edgecolor="black", facecolor="white", lw=1
+                *zip(*polygon),
+                alpha=0.05, edgecolor="black", facecolor="white", lw=1
             )
         return ax
 
-    def _add_contours_for_target_centroids(self, ax: Axes, plot_type: PlotTypes) -> Axes:
+    def _add_contours_for_target_centroids(
+        self, ax: Axes, plot_type: PlotTypes,
+    ) -> Axes:
         if plot_type == PlotTypes.CVT:
             color, line_width = mcolors.CSS4_COLORS["salmon"], 1
         else:
@@ -81,7 +84,7 @@ class CVTPlotting:
         fig: Optional[Figure],
         plotting_metadata: CVTPlottingData,
         annotate: bool = False,
-    ):
+    ) -> Axes:
         fig, ax = (fig, ax) \
             if ax is not None else \
             plt.subplots(facecolor="white", edgecolor="white")
@@ -134,7 +137,8 @@ class CVTPlotting:
                 legend_labels=plotting_metadata.legend_label_dict,
             )
 
-        elif plotting_metadata.plot_type == PlotTypes.ALL_MATCHES or plotting_metadata.plot_type == PlotTypes.UNIQUE_MATCHES:
+        elif plotting_metadata.plot_type == PlotTypes.ALL_MATCHES or \
+                plotting_metadata.plot_type == PlotTypes.UNIQUE_MATCHES:
             ax = self._plot_matches_mapped_to_references(
                 ax=ax,
                 annotate=annotate,
@@ -148,7 +152,6 @@ class CVTPlotting:
                 annotate=annotate,
                 archive=plotting_metadata.archive,
                 fitness_limits=plotting_metadata.fitness_limits,
-                # annotations=plotting_metadata.plotting_annotations,
             )
 
         return ax
@@ -231,7 +234,9 @@ class CVTPlotting:
                 ax.fill(*zip(*polygon), alpha=0.8, color=list_of_colors[group_id])
                 if annotate:
                     ax.annotate(
-                        str(group_id), (self.centroids[idx, 0], self.centroids[idx, 1]), fontsize=4
+                        str(group_id),
+                        (self.centroids[idx, 0], self.centroids[idx, 1]),
+                        fontsize=4
                     )
         return ax
 

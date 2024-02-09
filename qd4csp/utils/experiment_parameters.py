@@ -107,15 +107,13 @@ class ExperimentParameters:
             "number_of_relaxation_steps": 0,
             # if seeding is used, the maximum number of atoms in structures to use
             "filter_starting_structures": 24,
-            # whether to add reference structures into the search
-            "seed": False,
             # whether to apply force threshold
-            "force_threshold": False,
+            "force_threshold": True,
             # value of force threshold
-            "force_threshold_exp_fmax": 2.0,
+            "force_threshold_exp_fmax": 9.0,
             # if whole archive is being relaxed
             "relax_archive_every_n_generations_n_relaxation_steps": 0,
-            # fmax threshold for fire algorithm
+            # fmax threshold for fire algorithm used in relaxation
             "fmax_threshold": 0.2,
         }
 

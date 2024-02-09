@@ -512,7 +512,7 @@ class StructureEvaluation:
 
             index_in_archive_list = best_match_index[0]
             ref_centroids_with_matches.append(
-                int(true_centroid_indices[index_in_archive_list]) # todo: fixing here
+                int(true_centroid_indices[index_in_archive_list])
             )
             ref_mp_reference_of_matches.append(match_mp_ref)
             ref_confidence_levels.append(confidence_levels[index_in_archive_list])

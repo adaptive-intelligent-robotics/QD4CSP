@@ -11,7 +11,6 @@ import psutil
 from ase import Atoms
 from chgnet.graph import CrystalGraphConverter
 from pymatgen.io.ase import AseAtomsAdaptor
-from sklearn.neighbors import KDTree
 from tqdm import tqdm
 
 from qd4csp.crystal.crystal_evaluator import CrystalEvaluator
@@ -22,11 +21,8 @@ from qd4csp.map_elites.elites_utils import (
     make_experiment_folder,
     Species,
 )
-from qd4csp.map_elites.cvt_centroids.initialise import write_centroids, cvt, \
-    initialise_kdt_and_centroids
+from qd4csp.map_elites.cvt_centroids.initialise import initialise_kdt_and_centroids
 from qd4csp.utils.utils import load_archive_from_pickle
-
-#todo: change run parameters to use Experiment Parameters class
 
 class CVTMAPElites:
     def __init__(

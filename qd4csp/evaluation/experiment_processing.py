@@ -56,11 +56,13 @@ class ExperimentProcessor:
         self.filter_for_experimental_structures = filter_for_experimental_structures
         self.formula = experiment_label[15:].split("_")[0]
 
+        cvt_plot_limits = self.experiment_parameters.return_min_max_bd_values()
+
         self.plotter = CVTPlotting(
             centroids=self.all_centroids,
             target_centroids=self.compute_target_centroids(),
-            axes_minimum_values=np.array([0, 0]), #todo: should these be dynamic
-            axes_maximum_values=np.array([1, 1]),
+            axes_minimum_values=cvt_plot_limits[0],
+            axes_maximum_values=cvt_plot_limits[1],
             directory_string=self.experiment_directory_path,
             overload_x_axis_limits=(
                 self.experiment_parameters.cvt_run_parameters[
