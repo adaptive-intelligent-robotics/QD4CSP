@@ -1,0 +1,8 @@
+.idea
+__pycache__
+.pytest_cache
+.DS_Store
+
+experiments
+mp_reference_analysis
+experiment_configs

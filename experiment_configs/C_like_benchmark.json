@@ -1,0 +1,76 @@
+{
+  "system_name": "C",
+  "blocks": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+  ],
+  "volume": 450,
+  "ratio_of_covalent_radii": 0.4,
+  "splits": "DUMMY",
+  "cellbounds": "DUMMY",
+  "operator_probabilities": [
+    0.0,
+    0,
+    10.0,
+    0.0
+  ],
+  "n_behavioural_descriptor_dimensions": 2,
+  "number_of_niches": 200,
+  "maximum_evaluations": 5000,
+  "experiment_tag": "C_like_benchmark",
+  "fitness_min_max_values": [
+    6.5,
+    9.5
+  ],
+  "filter_comparison_data_for_n_atoms": 24,
+  "start_generator": "pyxtal",
+  "cvt_run_parameters": {
+    "cvt_samples": 25000,
+    "batch_size": 100,
+    "random_init": 0.1,
+    "random_init_batch": 20,
+    "dump_period": 200,
+    "parallel": true,
+    "cvt_use_cache": true,
+    "bd_minimum_values": [
+      0,
+      4
+    ],
+    "bd_maximum_values": [
+      5.5,
+      535
+    ],
+    "behavioural_descriptors": [
+      "band_gap",
+      "shear_modulus"
+    ],
+    "number_of_relaxation_steps": 100,
+    "curiosity_weights": true,
+    "filter_starting_structures": 24,
+    "force_threshold": true,
+    "normalise_bd": true,
+    "force_threshold_exp_fmax": 9
+  }
+}
