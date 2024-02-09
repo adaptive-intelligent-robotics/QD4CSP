@@ -92,7 +92,7 @@ To run a demo experiment run:
 ```shell
  python3 scripts/experiment_from_config.py experiment_configs/demo.json
 ```
-This will run a very simple demo with 2 $$TiO_2$$ structures. All results will be saved under the `experiments_folder`.
+This will run a very simple demo with 2 $TiO_2$ structures. All results will be saved under the `experiments_folder`.
 
 Experiments are most conveniently defined using a configuration file. 
 These files can be generated individually or in batches using the directions below 
@@ -110,7 +110,7 @@ You can run an experiment from a configuration file or directly from a file.
 The latter is recommended for debugging new features. 
 
 ### Running from a configuration file
-_If you are NOT using the Si, SiO2, SiC or TiO2 system refer to section New materials set up below._
+_If you are NOT using the $C$, $SiO_2$, $SiC$ or $TiO_2$ system refer to section New materials set up below._
 
 To run your job simply run
 
