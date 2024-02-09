@@ -18,7 +18,7 @@ Quality-Diversity algorithms_.
 To get started with this package clone this repo:
 
 ```bash
-git clone #todo: update link 
+git clone https://github.com/adaptive-intelligent-robotics/QD4CSP
 ```
 Then enter the correct directory on your machine:
 ```bash
@@ -92,7 +92,7 @@ To run a demo experiment run:
 ```shell
  python3 scripts/experiment_from_config.py experiment_configs/demo.json
 ```
-This will run a very simple demo with 2 TiO2 structures. All results will be saved under the `experiments_folder`.
+This will run a very simple demo with 2 $$TiO_2$$ structures. All results will be saved under the `experiments_folder`.
 
 Experiments are most conveniently defined using a configuration file. 
 These files can be generated individually or in batches using the directions below 
@@ -173,3 +173,4 @@ If desired please set the necessary environment variables using
 ```shell
 export <env-variable-name>=<directory-location>
 ```
+or your preferred method of setting environment variables. 
