@@ -69,7 +69,8 @@
     ],
     "number_of_relaxation_steps": 100,
     "filter_starting_structures": 24,
-    "force_threshold": false,
-    "normalise_bd": true
+    "force_threshold": true,
+    "normalise_bd": true,
+    "force_threshold_exp_fmax": 9
   }
 }
