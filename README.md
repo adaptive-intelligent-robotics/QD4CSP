@@ -1,8 +1,7 @@
 # QD4CSP: Quality Diversity for Crystal Structure Prediction
 <p align="center">
-<img height="400" src="./Images/cvt_plot_gif.gif">
+<img src="images/cvt_plot_gif_low_res.gif" height="400" width="450">
 </p>
-
 
 
 `QD4CSP` is the first of its kind implementation combining the strengths of Quality-Diversity algorithms
@@ -10,8 +9,7 @@ for inorganic crystal structure prediction.
 This repository contains the code used for the paper _Illuminating the property space in crystal structure prediction using 
 Quality-Diversity algorithms_.
 
-
-##### Table of Contents  
+The gif shows the evolution of an archive of $TiO_2$ crystal structures over 5000 evaluations.
 
 ## Getting started with the package
 ### Installation
@@ -92,7 +90,7 @@ To run a demo experiment run:
 ```shell
  python3 scripts/experiment_from_config.py experiment_configs/demo.json
 ```
-This will run a very simple demo with 2 $$TiO_2$$ structures. All results will be saved under the `experiments_folder`.
+This will run a very simple demo with 2 $TiO_2$ structures. All results will be saved under the `experiments` folder.
 
 Experiments are most conveniently defined using a configuration file. 
 These files can be generated individually or in batches using the directions below 
@@ -110,7 +108,7 @@ You can run an experiment from a configuration file or directly from a file.
 The latter is recommended for debugging new features. 
 
 ### Running from a configuration file
-_If you are NOT using the Si, SiO2, SiC or TiO2 system refer to section New materials set up below._
+_If you are NOT using the $C$, $SiO_2$, $SiC$ or $TiO_2$ system refer to section New materials set up below._
 
 To run your job simply run
 
