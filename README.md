@@ -1,6 +1,6 @@
 # QD4CSP: Quality Diversity for Crystal Structure Prediction
 <p align="center">
-<img src="images/cvt_plot_gif_low_res.gif" height="400" width="450">
+<img src="images/cvt_plot_gif.gif" height="400" width="450">
 </p>
 
 
