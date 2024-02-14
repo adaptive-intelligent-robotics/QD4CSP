@@ -10,8 +10,7 @@ from qd4csp.utils.experiment_parameters import ExperimentParameters
 
 
 if __name__ == "__main__":
-    # file_location = ""
-    file_location = str(Path(__file__).parent.parent / "experiment_configs/demo.json")
+    file_location = ""
     if file_location == "":
         file_location = sys.argv[1]
     with open(file_location, "r") as file:
