@@ -3,17 +3,13 @@ import numpy as np
 from qd4csp.reference_setup.reference_analyser import ReferenceAnalyser
 
 if __name__ == "__main__":
-    # elements_list = [["C"], ["Si", "O"], ["Si", "C"], ["Ti", "O"]]
-    # atoms_counts_list = [[24], [8, 16], [12, 12], [8, 16]]
-    # formulas = ["C", "SiO2", "SiC", "TiO2"]
+    elements_list = [["C"], ["Si", "O"], ["Si", "C"], ["Ti", "O"]]
+    atoms_counts_list = [[24], [8, 16], [12, 12], [8, 16]]
+    formulas = ["C", "SiO2", "SiC", "TiO2"]
 
     fitness_limits = None
     band_gap_limits = None
     shear_moduli_limits = None
-
-    elements_list = [["Si", "C"]]
-    atoms_counts_list = [[12, 12]]
-    formulas = ["SiC"]
 
     for filter_experiment in [False]:
         for i, formula in enumerate(formulas):
