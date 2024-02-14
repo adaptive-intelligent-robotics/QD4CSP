@@ -19,12 +19,6 @@ def get_all_files_at_location(path_to_location: pathlib.Path) -> Tuple[List[str]
     return list_of_files, list_of_directories
 
 
-if __name__ == '__main__':
-    list_of_files, list_of_directories = get_all_files_at_location(
-         pathlib.Path(__file__).parent.parent.parent / ".experiment.nosync/experiments/group_TiO2_benchmark")
-    print()
-
-
 def load_centroids(filename: str) -> np.ndarray:
     with open(filename, "r") as file:
         centroids = np.loadtxt(file)

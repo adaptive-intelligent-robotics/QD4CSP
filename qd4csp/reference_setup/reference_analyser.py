@@ -138,7 +138,7 @@ class ReferenceAnalyser:
 
         fmax_list = []
         for force in forces:
-            fmax_list.append(np.max((np.array(force[:-3]) ** 2).sum(axis=1) ** 0.5))
+            fmax_list.append(np.max((np.array(force) ** 2).sum(axis=1) ** 0.5))
 
         fmax_list = np.take(fmax_list, indices_to_sort, axis=0)
         energies = np.take(energies, indices_to_sort, axis=0)

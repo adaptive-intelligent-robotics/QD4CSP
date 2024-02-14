@@ -9,43 +9,6 @@ from qd4csp.utils.get_mpi_structures import get_all_materials_with_formula
 from qd4csp.utils.utils import normalise_between_0_and_1
 
 
-def compute_centroids_for_target_solutions(
-    centroids_file: str,
-    target_data_file: str,
-    filter_for_number_of_atoms: Optional[int],
-):
-    with open(centroids_file, "r") as f:
-        c = np.loadtxt(f)
-    kdt = KDTree(c, leaf_size=30, metric="euclidean")
-
-    with open(target_data_file, "rb") as file:
-        list_of_properties = pickle.load(file)
-
-    docs, atom_objects = get_all_materials_with_formula("TiO2")
-
-    if filter_for_number_of_atoms is not None:
-        fitnesses = []
-        formation_energies = []
-        band_gaps = []
-        for i, atoms in enumerate(atom_objects):
-            if len(atoms.get_positions()) == 24:
-                fitnesses.append(list_of_properties[0][i])
-                formation_energies.append(list_of_properties[2][i])
-                band_gaps.append(list_of_properties[1][i])
-    else:
-        fitnesses = list_of_properties[0]
-        formation_energies = list_of_properties[2]
-        band_gaps = list_of_properties[1]
-    centroids = []
-    for i in range(len(fitnesses)):
-        niche_index = kdt.query([(formation_energies[i], band_gaps[i])], k=1)[1][0][0]
-        niche = kdt.data[niche_index]
-        n = make_hashable(niche)
-        centroids.append(n)
-
-    return centroids
-
-
 def reassign_data_from_pkl_to_new_centroids(
     centroids_file: str,
     target_data: Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray],
