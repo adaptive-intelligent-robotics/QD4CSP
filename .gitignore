@@ -6,3 +6,4 @@ __pycache__
 experiments
 mp_reference_analysis
 experiment_configs
+.experiment.nosync
