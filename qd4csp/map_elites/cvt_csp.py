@@ -64,12 +64,13 @@ class CVTMAPElites:
             run_parameters["relax_every_n_generations"]
             if "relax_every_n_generations" in run_parameters.keys()
             else 0
-        )
+        ) # if used this allows individuals to be relaxed every n generations,
+        # otherwise unrelaxed individuals are added ot archive
         self.relax_archive_every_n_generations = (
             run_parameters["relax_archive_every_n_generations"]
             if "relax_archive_every_n_generations" in run_parameters.keys()
             else 0
-        )
+        ) # if used this relaxes all individuals in the archive every n generations
         self.generation_counter = 0
         self.run_parameters = run_parameters
 
@@ -241,6 +242,10 @@ class CVTMAPElites:
         return mutated_offsprings
 
     def _set_number_of_relaxation_steps(self):
+        """Set number of relaxation steps per individual.
+
+        If
+        """
         if self.relax_every_n_generations != 0 and (
             self.relax_archive_every_n_generations == 0
         ):

@@ -58,7 +58,7 @@ class ReferencePlotter:
 
         # Create colorbar
         cbar = ax.figure.colorbar(im, ax=ax, shrink=0.5, **cbar_kw)
-        cbar.ax.set_ylabel(cbarlabel, rotation=-90, va="right")
+        cbar.ax.set_ylabel(cbarlabel, rotation=-90, va="bottom")
 
         # Show all ticks and label them with the respective list entries.
         ax.set_xticks(np.arange(data.shape[1]), labels=col_labels)

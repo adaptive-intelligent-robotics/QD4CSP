@@ -105,7 +105,7 @@ class ExperimentParameters:
                 MaterialProperties.BAND_GAP,
                 MaterialProperties.SHEAR_MODULUS,
             ],  # currently only this combination is handled natively
-            # number of relaxation for lal individuals
+            # number of relaxation for all individuals
             "number_of_relaxation_steps": 0,
             # if seeding is used, the maximum number of atoms in structures to use
             "filter_starting_structures": 24,
@@ -113,7 +113,7 @@ class ExperimentParameters:
             "force_threshold": True,
             # value of force threshold
             "force_threshold_exp_fmax": 9.0,
-            # if whole archive is being relaxed
+            # take all individuals in archive and relax tehm every n every n generations
             "relax_archive_every_n_generations_n_relaxation_steps": 0,
             # fmax threshold for fire algorithm used in relaxation
             "fmax_threshold": 0.2,

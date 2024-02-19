@@ -644,9 +644,9 @@ class ReferenceAnalyser:
                 )
         else:
             reference_analyser.bd_minimum_values = np.array(
-                [band_gap_limits[0], shear_moduli_limits[0]])
+                [band_gap_limits[0], shear_modulus_limits[0]])
             reference_analyser.bd_maximum_values = np.array(
-                [band_gap_limits[1], shear_moduli_limits[1]])
+                [band_gap_limits[1], shear_modulus_limits[1]])
         reference_analyser.initialise_kdt_and_centroids(
             number_of_niches=number_of_centroid_niches,
             band_gap_limits=band_gap_limits,
