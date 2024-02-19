@@ -6,6 +6,7 @@ authors = ["Marta Wolinska <marta.wolinska16@imperial.ac.uk>"]
 readme = "README.md"
 packages = [
     {include = "qd4csp"},
+    {include = "scripts"},
 ]
 
 
@@ -38,6 +39,7 @@ click = "^8.1.7"
 chgnet = "0.2.0"
 mpcontribs-client = "^5.6.0"
 pyshtools = ">4.10, <4.11"
+gdown = "^5.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -46,3 +48,9 @@ pytest = "^7.3.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+map-elites = "qd4csp.cli.map_elites_main:run_map_elites_experiment"
+download-data = "qd4csp.cli.download_data:download_data_folder"
+prepare-reference-data = "qd4csp.cli.prepare_reference_data:prepare_reference_data"
+add-new-reference = "qd4csp.cli.prepare_reference_data:create_new_reference_material"

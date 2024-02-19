@@ -1,18 +1,19 @@
-import json
 import os
 import pathlib
 import sys
 import time
-from dataclasses import asdict
+from argparse import ArgumentParser
+from pathlib import Path
 from typing import Optional
 
 from qd4csp.crystal.crystal_evaluator import CrystalEvaluator
 from qd4csp.crystal.crystal_system import CrystalSystem
-from qd4csp.map_elites.cvt_csp import CVTMAPElites
-from qd4csp.map_elites.cvt_centroids.initialise import __centroids_filename
-from qd4csp.map_elites.elites_utils import make_current_time_string
-from qd4csp.utils.experiment_parameters import ExperimentParameters
 from qd4csp.evaluation.experiment_processing import ExperimentProcessor
+from qd4csp.map_elites.cvt_centroids.initialise import __centroids_filename
+from qd4csp.map_elites.cvt_csp import CVTMAPElites
+from qd4csp.map_elites.elites_utils import make_current_time_string, \
+    make_experiment_folder
+from qd4csp.utils.experiment_parameters import ExperimentParameters
 
 
 class HiddenPrints:
@@ -45,6 +46,9 @@ def main(
         experiment_label = f"{current_time_label}_{experiment_parameters.system_name}_{experiment_parameters.experiment_tag}"
 
         print(f"Experiment data is saved in {experiment_label}")
+
+        experiment_folder_path = make_experiment_folder(experiment_label)
+        experiment_parameters.dump_to_pickle(experiment_folder_path)
 
         crystal_system = CrystalSystem(
             atom_numbers_to_optimise=experiment_parameters.blocks,
@@ -117,12 +121,11 @@ def main(
                 run_parameters=experiment_parameters.cvt_run_parameters,
                 experiment_label=experiment_label,
             )
-        print(f"time taken {time.time() - tic}")
 
-        experiment_parameters.splits = "DUMMY"
-        experiment_parameters.cellbounds = "DUMMY"
-        with open(f"{experiment_directory_path}/config.json", "w") as file:
-            json.dump(asdict(experiment_parameters), file)
+        # experiment_parameters.splits = "DUMMY"
+        # experiment_parameters.cellbounds = "DUMMY"
+        # with open(f"{experiment_directory_path}/config.json", "w") as file:
+        #     json.dump(asdict(experiment_parameters), file)
 
         if experiment_parameters.cvt_run_parameters["normalise_bd"]:
             bd_minimum_values, bd_maximum_values = [0, 0], [1, 1]
@@ -156,3 +159,18 @@ def main(
         experiment_processor.process_symmetry(
             archive_number=experiment_parameters.maximum_evaluations
         )
+
+
+def run_map_elites_experiment():
+    parser = ArgumentParser()
+    parser.add_argument(
+        "-c",
+        "--config",
+        help="Path to configuration file relative to your location.",
+        default="experiment_configs/demo.json",
+        type=str,
+    )
+
+    args = parser.parse_args()
+    experiment_parameters = ExperimentParameters.from_config_json(file_location=Path(args.config))
+    main(experiment_parameters)
