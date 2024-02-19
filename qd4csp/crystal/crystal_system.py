@@ -102,7 +102,6 @@ class CrystalSystem:
             individual = AseAtomsAdaptor.get_atoms(self._start_generator.to_pymatgen())
 
         individual.info["confid"] = individual_id
-        individual.info["curiosity"] = 0
         return individual
 
     def create_n_individuals(
