@@ -7,7 +7,8 @@ from qd4csp.map_elites.cvt_centroids.initialise import __centroids_filename
 
 def plot_all_metrics_and_cvt_for_experiment(
         experiment_path: Path,
-        save_structure_images: bool = False
+        save_structure_images: bool = False,
+        annotate: bool = False
 ):
     with open(experiment_path / "experiment_parameters.pkl", "rb") as file:
         experiment_parameters = pickle.load(file)
@@ -31,9 +32,11 @@ def plot_all_metrics_and_cvt_for_experiment(
         fitness_limits=experiment_parameters.fitness_min_max_values,
         save_structure_images=save_structure_images,
         filter_for_experimental_structures=False,
+        experiment_directory_path=experiment_path
     )
 
-    experiment_processor.plot()
+    experiment_processor.plot(annotate=annotate)
     experiment_processor.process_symmetry(
-        archive_number=experiment_parameters.maximum_evaluations
+        archive_number=experiment_parameters.maximum_evaluations,
+        annotate=annotate,
     )
