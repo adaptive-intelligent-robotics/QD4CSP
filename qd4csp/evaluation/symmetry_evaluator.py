@@ -82,7 +82,10 @@ class StructureEvaluation:
             "C": [],
         }
 
-        self.fooled_ground_states_dict.update({formula: list_of_fooled_ground_state})
+        if formula not in list(self.fooled_ground_states_dict.keys()):
+            self.fooled_ground_states_dict.update({formula: list_of_fooled_ground_state})
+
+        self.fooled_ground_states = self.fooled_ground_states_dict[formula]
 
     def initialise_reference_structures(
         self,
@@ -540,7 +543,7 @@ class StructureEvaluation:
         plotting_matches_from_mp: PlottingMatches,
         directory_string: Union[pathlib.Path, str],
     ):
-        if bool(self.ground_state  in plotting_matches_from_archive.mp_references):
+        if bool(self.ground_state in plotting_matches_from_archive.mp_references):
             indices_to_check = np.argwhere(
                 np.array(plotting_matches_from_archive.mp_references) == self.ground_state
             ).reshape(-1)
@@ -552,7 +555,7 @@ class StructureEvaluation:
             ground_state_match = ConfidenceLevels.NO_MATCH
 
         fooled_ground_state_match = ConfidenceLevels.NO_MATCH
-        for el in self.fooled_ground_states_dict:
+        for el in self.fooled_ground_states:
             if bool(el in plotting_matches_from_archive.mp_references):
                 indices_to_check = np.argwhere(
                     np.array(plotting_matches_from_archive.mp_references) == el
