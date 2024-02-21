@@ -1,24 +1,19 @@
 import shutil
-from pathlib import Path
 
 from qd4csp.reference_setup.reference_analyser import ReferenceAnalyser
-from qd4csp.utils.env_variables import MP_REFERENCE_FOLDER
+from qd4csp.utils.env_variables import MP_REFERENCE_FOLDER, EXPERIMENT_FOLDER
 from qd4csp.cli.all_plots_for_single_experiment import \
     plot_all_metrics_and_cvt_for_experiment
 from qd4csp.evaluation.average_statistics_generator import \
     AverageStatisticsGenerator
 
-if __name__ == '__main__':
-    # path_to_reproduce_results = EXPERIMENT_FOLDER / "reported_results"
-    # (path_to_reproduce_results / "reported_figures").mkdir(exist_ok=True)
-
-    path_to_reproduce_results = Path(__file__).parent.parent / f".experiments.nosync/experiments/reported_results_update"
+def reproduce_results():
+    path_to_reproduce_results = EXPERIMENT_FOLDER / "reported_results"
     (path_to_reproduce_results / "reported_figures").mkdir(exist_ok=True)
 
     print("Plotting mean TiO2 results: Figure 3")
     average_statistics_generator = AverageStatisticsGenerator(
-        path_to_experiments=Path(__file__).parent.parent
-        / f".experiments.nosync/experiments/reported_results_update/TiO2/",
+        path_to_experiments=path_to_reproduce_results / "TiO2",
     )
     average_statistics_generator.plot_mean_statistics(
         folder_names=["TiO2_benchmark_with_high_threshold"],
@@ -47,7 +42,7 @@ if __name__ == '__main__':
 
     print("Plotting mean TiO2 results: Figures 4, 5, 7")
     plot_all_metrics_and_cvt_for_experiment(
-        Path(__file__).parent.parent / f".experiments.nosync/experiments/reported_results_update/TiO2/TiO2_benchmark_with_high_threshold/20240201_09_04_TiO2_benchmark_1_9"
+        path_to_reproduce_results / "TiO2/TiO2_benchmark_with_high_threshold/20240201_09_04_TiO2_benchmark_1_9"
     )
 
     print("Computing average match performance for TiO2: section 4.2")
@@ -61,8 +56,7 @@ if __name__ == '__main__':
     print("Computing mean statistics for other materials: Table 1")
     for material in ["SiO2", "SiC", "C"]:
         average_statistics_generator = AverageStatisticsGenerator(
-            path_to_experiments=Path(__file__).parent.parent
-            / f".experiments.nosync/experiments/reported_results_update/{material}/",
+            path_to_experiments=path_to_reproduce_results / material,
         )
         average_statistics_generator.compute_average_match_performance_for_all_experiments()
 
@@ -79,9 +73,7 @@ if __name__ == '__main__':
     }
     for material, experiment in random_experiment_mapping.items():
         plot_all_metrics_and_cvt_for_experiment(
-            Path(__file__).parent.parent
-            / f".experiments.nosync/experiments/reported_results_update/{material}/"
-              f"{material}_like_benchmark_with_high_threshold/{experiment}",
+            path_to_reproduce_results / f"{material}/{material}_like_benchmark_with_high_threshold/{experiment}",
         )
 
         shutil.copy(

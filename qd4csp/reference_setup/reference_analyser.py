@@ -385,7 +385,7 @@ class ReferenceAnalyser:
         if self.save_plot:
             fig.savefig(
                 self.save_path / "plots"
-                / f"{self.formula}_fmax_histogram_no_stress{self.experimental_string}.png",
+                / f"{self.formula}_fmax_histogram_{self.experimental_string}.png",
                 format="png",
             )
         else:
