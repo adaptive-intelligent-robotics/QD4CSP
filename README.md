@@ -23,8 +23,9 @@ Then enter the correct directory on your machine:
 cd QD4CSP
 ```
 We provide two installation methods, one using poetry (preferred) and using standard `requirements.txt`.
+Using poetry enables the use of our cli. 
 
-#### Option 1: Poetry
+#### Option 1: Poetry [Recommended]
 This package uses [poetry](https://python-poetry.org) dependency manager. 
 To install all dependencies run:
 ```bash
@@ -86,7 +87,13 @@ if __name__ == '__main__':
 ```
 
 ### Using the package
-To run a demo experiment run:
+To run a demo experiment using our cli run:
+
+```shell
+map-elites -c experiment_configs/demo.json
+```
+
+or if required use the provided scripts:
 ```shell
  python3 scripts/experiment_from_config.py experiment_configs/demo.json
 ```
@@ -99,8 +106,13 @@ The configuration files used for the paper are also provided.
 To reproduce the experiments reported run the same command with any of the provided configuration files:
 `TiO2_benchamrk.json`, `SiO2_like_benchmark.json`, `SiC_like_benchmark.json` and `C_like_benchmark.json`
 
+Using our cli:
 ```shell
- python3 scripts/experiments/experiment_from_config.py experiment_configs/<desired-config-file>
+map-elites -c <desired-config-file>
+```
+or if required: 
+```shell
+ python3 scripts/experiment_from_config.py experiment_configs/<desired-config-file>
 ```
 
 ## Running an Experiment 
