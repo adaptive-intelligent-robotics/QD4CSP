@@ -22,6 +22,8 @@ FROM base as code
 
 WORKDIR /workdir
 
+RUN apt-get install -y python3-vtk7
+
 # copy required files into docker image
 COPY pyproject.toml /workdir/pyproject.toml
 COPY poetry.lock /workdir/poetry.lock

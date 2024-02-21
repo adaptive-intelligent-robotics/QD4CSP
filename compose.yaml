@@ -4,8 +4,13 @@ services:
   qd4csp:
     build: .
     volumes:
-      - "/Users/marta/Documents/MSc Artificial Intelligence/Thesis/paper/QD4CSP/experiments:/workdir/experiments"
+      - ./experiments:/workdir/experiments
       - ./experiment_configs:/workdir/experiment_configs
     stdin_open: true # docker run -i
     tty: true # docker run -t
+    environment:
+      - EXPERIMENT_FOLDER=/workdir/experiments
+      - MP_REFERENCE_FOLDER=/workdir/mp_reference_analysis
+      - CONFIGS_FOLDER =/workdir/experiment_configs
+      - MP_API_KEY=<your-api-key-here>
 #    command: map-elites
