@@ -1,0 +1,9 @@
+*
+**
+**/**
+!qd4csp
+!poetry.lock
+!pyproject.toml
+!mp_reference_analysis
+!scripts
+!README.md

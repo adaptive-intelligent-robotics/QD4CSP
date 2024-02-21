@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  qd4csp:
+    build: .
+    volumes:
+      - ./experiments:/workdir/experiments
+      - ./experiment_configs:/workdir/experiment_configs
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+#    command: map-elites
