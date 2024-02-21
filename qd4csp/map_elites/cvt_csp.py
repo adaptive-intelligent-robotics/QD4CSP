@@ -35,7 +35,7 @@ class CVTMAPElites:
         self.number_of_bd_dimensions = number_of_bd_dimensions
         self.crystal_system = crystal_system
         self.crystal_evaluator = crystal_evaluator
-        self.graph_converter = CrystalGraphConverter()
+        self.graph_converter = CrystalGraphConverter(on_isolated_atoms="warn")
 
     def _initialise_run_parameters(
         self, number_of_niches: int, maximum_evaluations: int,
@@ -233,7 +233,8 @@ class CVTMAPElites:
             z = self.crystal_system.mutate([x, y])
             if z is None or (
                 self.graph_converter(
-                    AseAtomsAdaptor.get_structure(z), on_isolated_atoms="warn"
+                    AseAtomsAdaptor.get_structure(z),
+                    # on_isolated_atoms="warn"
                 )
                 is None
             ):

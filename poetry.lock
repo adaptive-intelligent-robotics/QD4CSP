@@ -714,46 +714,46 @@ vapory = "*"
 
 [[package]]
 name = "chgnet"
-version = "0.2.0"
+version = "0.2.1"
 description = "Pretrained Universal Neural Network Potential for Charge-informed Atomistic Modeling"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.9"
 files = [
-    {file = "chgnet-0.2.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:1da83498e563f846d9e106cbc1b52c5466b5f1b78378428f8c801b2621afe19a"},
-    {file = "chgnet-0.2.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1b9d01421131641821327f8da3b67957407f509cf62969a35f9f1f8908852579"},
-    {file = "chgnet-0.2.0-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:47a9e80406f775e9cbf285d9ea45f3fa77e5a0b49c5aa5a13dd976c02c9ea9d8"},
-    {file = "chgnet-0.2.0-cp310-cp310-musllinux_1_1_i686.whl", hash = "sha256:051febb8793f342bea6bd735ef942c608d3a70467d41a250a20bd24efe007f8d"},
-    {file = "chgnet-0.2.0-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:08a8e5f1360e749c79fc64b24989f17d8bb5733335afd674d38e679b45929518"},
-    {file = "chgnet-0.2.0-cp310-cp310-win32.whl", hash = "sha256:c9be26f28cbc37c7cbc43c5afc164d4adf55879fe1f0b5d10fcd2477195e8032"},
-    {file = "chgnet-0.2.0-cp310-cp310-win_amd64.whl", hash = "sha256:a3f69d9c98a9b08f53f83207e9ef4a7bd84136057b514181580143089bb81293"},
-    {file = "chgnet-0.2.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:9bfa30e3aff4cdfb38865742eba0a3e304076b13c90232e01ba53ecf97377c4d"},
-    {file = "chgnet-0.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d5702bced7fe894cbb931ec19bcafbca0f8ab964638bca98ef780a2d5ac8e4ec"},
-    {file = "chgnet-0.2.0-cp311-cp311-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:135d91250e8cf4c0892cbc14a7a1b9de620581746201a9caa29773398a83e050"},
-    {file = "chgnet-0.2.0-cp311-cp311-musllinux_1_1_i686.whl", hash = "sha256:39c43442113519b9fe54ca920096b41c061d73db55539ee39ba1bc1e2103c056"},
-    {file = "chgnet-0.2.0-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:4b8d6a70e287a6d73987b6166f354fb7cca3f71b63356eaacdd96459fdb89db4"},
-    {file = "chgnet-0.2.0-cp311-cp311-win32.whl", hash = "sha256:07b27b5562d5ee18355bc70ccf649346d26bfd2dc577a2a7c92501f22ffd2e92"},
-    {file = "chgnet-0.2.0-cp311-cp311-win_amd64.whl", hash = "sha256:49ba132696dd962982c254edcd1d439747b09e057ab35118cb86235c908b4d29"},
-    {file = "chgnet-0.2.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:43cd710b03f5f3d1b654f53937c359afc09f6c9ce0f28bfeb3a2dfe3bebbb175"},
-    {file = "chgnet-0.2.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:138a1f3184a95548426290c2c8aec6219b32accb0d11f76f7b2ba931b1240c04"},
-    {file = "chgnet-0.2.0-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:a84e768538607a3b896cb1aafca9727422382ae119f98380d97000db0e9fa6d0"},
-    {file = "chgnet-0.2.0-cp39-cp39-musllinux_1_1_i686.whl", hash = "sha256:aace505aa7ca644b44cd99b7a7b146fcb332202fc5625380af2b4ca3ab2fac8f"},
-    {file = "chgnet-0.2.0-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:33621f7d94c7176444bb35588d8943545e801bfa25d4473170a3910afffe8b53"},
-    {file = "chgnet-0.2.0-cp39-cp39-win32.whl", hash = "sha256:57d094dd37d16f34d09b8fad30affd2ab0b2b293c132ec574286f87abc4210de"},
-    {file = "chgnet-0.2.0-cp39-cp39-win_amd64.whl", hash = "sha256:6aafb1899d99642c338b5af36e3873dd7aa61eea0b0ad6191ea5f522e8505c14"},
-    {file = "chgnet-0.2.0-py3-none-any.whl", hash = "sha256:ee59c4595c10fd08d02e97d4d8262affbf63ef4f4fc398ab2ce846ca4f6299a1"},
-    {file = "chgnet-0.2.0.tar.gz", hash = "sha256:5c2a3e1b1e9fb5773b999bbbd5f90b7bd08f7be63ad3334ebdeb690a1ab39cb2"},
+    {file = "chgnet-0.2.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:ed1906494916aa1b66b99b640854427ba05125085af9b94041087bb7f88ac821"},
+    {file = "chgnet-0.2.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d797646b8ac1691a5dea9a74545a0bb2fa5b9f10ac102424546a4215a849681f"},
+    {file = "chgnet-0.2.1-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:eab9769db0ab6d5e6fe90c115b84b7cdea7062a7ab64b306a1fb026c1634bba7"},
+    {file = "chgnet-0.2.1-cp310-cp310-musllinux_1_1_i686.whl", hash = "sha256:645fd753bb757dce396cb2b29c95da5d3de4140b15dd7196cac147c387cfb844"},
+    {file = "chgnet-0.2.1-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:2b216582d94f8e173ba7a1de13184e1b8d86a9e961812348141d92332705eb6a"},
+    {file = "chgnet-0.2.1-cp310-cp310-win32.whl", hash = "sha256:ce563c7bf7ac9e3e4438b1fed8c5dea9d2b7fa38a72b9552aadd26be7edf1255"},
+    {file = "chgnet-0.2.1-cp310-cp310-win_amd64.whl", hash = "sha256:817614aa51b4313248b08b8258535db7053d81a7c40d22b7e07d658b032138f5"},
+    {file = "chgnet-0.2.1-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:c42e2fc741db09acf70865697ca5cb2240235494902e010f2cf5da0a1dd4e7f0"},
+    {file = "chgnet-0.2.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f5667637bc7ac6383d6a54282d3fafb396d617e10118ad8eb86e3e479f1c3dbe"},
+    {file = "chgnet-0.2.1-cp311-cp311-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:29b08f309f24f04c692a9f8e56140ebec869de269b1d1c411b6aba8cbbc546b2"},
+    {file = "chgnet-0.2.1-cp311-cp311-musllinux_1_1_i686.whl", hash = "sha256:02a59b405e4e871f3f5eac2fb52a72039f72ad13bde6e4870fdd7c5def5c4bf4"},
+    {file = "chgnet-0.2.1-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:5121bf9085a8c757a7daeafd9122e936df863c502db30f4bde74d5bec3446914"},
+    {file = "chgnet-0.2.1-cp311-cp311-win32.whl", hash = "sha256:6c8a8014d6c59ac74c0fa0ea043423c4ae77809a46d744369eac58ccab3f98cd"},
+    {file = "chgnet-0.2.1-cp311-cp311-win_amd64.whl", hash = "sha256:2557e76c5b53102f054be8758038b1b6ab23fd4fe3a19fe3a87c8a30962bf868"},
+    {file = "chgnet-0.2.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:e2d62fb45011f729b9d30f5d93208df78cbd5847c9f6a7bf93765291cf1bd39d"},
+    {file = "chgnet-0.2.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:dadc0d6f7ea37a575ae7b09a544b256411be97e5532a1baf2658d82b20dc6f69"},
+    {file = "chgnet-0.2.1-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:e2439e1a90fe991f657d471d63e2952bc6d3ca153353efe32aa1970fe6559f7b"},
+    {file = "chgnet-0.2.1-cp39-cp39-musllinux_1_1_i686.whl", hash = "sha256:e31c132ef27dba718dfd57f53668b010f9438a6a9bd1b97a6cbc8c0d898affb7"},
+    {file = "chgnet-0.2.1-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:c8f0bb9781ac6aa55359ad90ee3f8d991eac388800b359943d4570bb9b780c77"},
+    {file = "chgnet-0.2.1-cp39-cp39-win32.whl", hash = "sha256:dd0a86cb285a28f2df81e703bfd260c065e55fc61d80355a75cd4a19e809cafb"},
+    {file = "chgnet-0.2.1-cp39-cp39-win_amd64.whl", hash = "sha256:30c5390a726aa7fb8079bad3b3a79fad6347bb516fb0e8b16b64d83082f4f732"},
+    {file = "chgnet-0.2.1.tar.gz", hash = "sha256:b4e1fa95b2e3de1802976e53e19b37049ad44d806e6c541092cbb37b54548235"},
 ]
 
 [package.dependencies]
 ase = ">=3.22.0"
 cython = ">=0.29.26"
 numpy = ">=1.21.6"
-pymatgen = ">=2022.4.19"
+nvidia-ml-py3 = ">=7.352.0"
+pymatgen = ">=2023.5.31"
 torch = ">=1.11.0"
 
 [package.extras]
-crystal-toolkit = ["crystal-toolkit"]
 docs = ["lazydocs"]
+examples = ["crystal-toolkit", "pandas"]
 test = ["pytest", "pytest-cov"]
 
 [[package]]
@@ -5579,4 +5579,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9, <3.11"
-content-hash = "80dea6a2a7a2cd54b53a8fb2dca0a236ae062e5a111cd53cffbcf15679ae9943"
+content-hash = "ae9b5e2c111c6d31692a4a2f9942549f280aa2221aea598c87f248555f07303e"
