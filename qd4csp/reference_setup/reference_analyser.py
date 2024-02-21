@@ -33,9 +33,7 @@ from qd4csp.utils.env_variables import EXPERIMENT_FOLDER, MP_REFERENCE_FOLDER
 from qd4csp.utils.experiment_parameters import ExperimentParameters
 from qd4csp.utils.utils import load_centroids, normalise_between_0_and_1
 
-import scienceplots
 
-plt.style.use("science")
 plt.rcParams["savefig.dpi"] = 300
 
 

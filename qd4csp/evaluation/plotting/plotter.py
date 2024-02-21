@@ -15,7 +15,6 @@ from qd4csp.evaluation.confidence_levels import ConfidenceLevels
 from qd4csp.map_elites.archive import Archive
 from qd4csp.evaluation.plotting.utils import get_voronoi_finite_polygons_2d
 
-import scienceplots
 plt.rcParams["savefig.dpi"] = 300
 
 class CVTPlotting:
