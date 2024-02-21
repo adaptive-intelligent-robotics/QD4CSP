@@ -117,7 +117,11 @@ class ExperimentProcessor:
     def plot(self,
              annotate: bool = True, force_replot: bool = False):
         self._plot_all_maps_in_archive(annotate=annotate, force_replot=force_replot)
-        plot_gif(experiment_directory_path=str(self.experiment_directory_path))
+        try:
+            plot_gif(experiment_directory_path=str(self.experiment_directory_path))
+        except ValueError:
+            print("Gif could not be plotted due to different plot sizes, "
+                  "rerun function with force_replot = True")
         plot_all_statistics_from_file(
             filename=f"{self.experiment_directory_path}/{self.experiment_label}.dat",
             save_location=f"{self.experiment_directory_path}/",
