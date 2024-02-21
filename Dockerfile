@@ -36,4 +36,4 @@ RUN poetry install --without dev
 
 # set poetry to not create a venv since docker image provides a suitable venv
 
-ENTRYPOINT ["poetry", "run"]
+#ENTRYPOINT ["poetry", "shell"]

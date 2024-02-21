@@ -4,7 +4,7 @@ services:
   qd4csp:
     build: .
     volumes:
-      - ./experiments:/workdir/experiments
+      - "/Users/marta/Documents/MSc Artificial Intelligence/Thesis/paper/QD4CSP/experiments:/workdir/experiments"
       - ./experiment_configs:/workdir/experiment_configs
     stdin_open: true # docker run -i
     tty: true # docker run -t
