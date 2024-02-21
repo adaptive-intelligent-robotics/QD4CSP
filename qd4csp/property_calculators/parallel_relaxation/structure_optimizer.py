@@ -17,7 +17,7 @@ class BatchedStructureOptimizer:
     def __init__(self, batch_size: int = 10, fmax_threshold: float = 0.2):
         self.overriden_optimizer = OverridenFire()
         self.atoms_filter = AtomsFilterForRelaxation()
-        self.model = CHGNet.load()
+        self.model = CHGNet.load('0.2.0')
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(self.device)
         self.batch_size = batch_size
