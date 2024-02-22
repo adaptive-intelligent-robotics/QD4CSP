@@ -268,6 +268,7 @@ class ExperimentProcessor:
             formula=self.formula,
             filter_for_experimental_structures=self.filter_for_experimental_structures,
             reference_data_archive=target_archive,
+            enable_structure_visualiser=self.save_structure_images,
         )
         all_individual_indices_to_check = None
 

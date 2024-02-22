@@ -1,4 +1,5 @@
 import pickle
+from argparse import ArgumentParser
 from pathlib import Path
 
 from qd4csp.evaluation.experiment_processing import ExperimentProcessor
@@ -39,4 +40,34 @@ def plot_all_metrics_and_cvt_for_experiment(
     experiment_processor.process_symmetry(
         archive_number=experiment_parameters.maximum_evaluations,
         annotate=annotate,
+    )
+
+
+def plot_all_metrics_for_experiment_cli():
+    parser = ArgumentParser()
+    parser.add_argument(
+        "-e",
+        "--experiment",
+        help="Path to experiment that requires plotting."
+    )
+
+    parser.add_argument(
+        "-a",
+        "--annotate",
+        help="Optional. Annotate plots True / False.",
+        default="False",
+    )
+
+    parser.add_argument(
+        "-s",
+        "--save_structures",
+        help="Optional. Save structure images True / False",
+        default="False",
+    )
+
+    args = parser.parse_args()
+    plot_all_metrics_and_cvt_for_experiment(
+        experiment_path=Path(args.experiment),
+        annotate=args.annotate,
+        save_structure_images=args.save_structures
     )

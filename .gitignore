@@ -7,3 +7,4 @@ experiments
 mp_reference_analysis
 experiment_configs
 .experiments.nosync
+plots

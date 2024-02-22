@@ -67,7 +67,7 @@ def reproduce_results():
 
     shutil.copy(
         src=path_to_reproduce_results / "TiO2/TiO2_benchmark_with_high_threshold/20240201_09_04_TiO2_benchmark_1_9/cvt_matches_from_archive_mp_reference_view.png",
-        dst=path_to_reproduce_results / "reported_figures/main_figure_7.png]",
+        dst=path_to_reproduce_results / "reported_figures/main_figure_7.png",
     )
 
     print("Computing average match performance for TiO2: section 4.2")
