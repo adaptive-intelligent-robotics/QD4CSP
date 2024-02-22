@@ -13,7 +13,6 @@ def get_all_materials_with_formula(formula: str):
     with MPRester(api_key=MP_API_KEY) as mpr:
         docs = mpr.summary.search(
             formula=formula,
-            # band_gap=(0.5, 1.0),
             fields=[
                 "material_id",
                 "band_gap",

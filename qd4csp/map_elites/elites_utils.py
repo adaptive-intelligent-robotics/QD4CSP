@@ -15,6 +15,7 @@ import numpy as np
 from ase import Atoms
 
 from qd4csp.map_elites.cvt_centroids.initialise import make_hashable
+from qd4csp.utils.env_variables import EXPERIMENT_FOLDER
 
 
 class Species:
@@ -67,8 +68,7 @@ def add_to_archive(
 
 
 def make_experiment_folder(directory_name: str):
-    path = Path(__file__).parent.parent.parent
-    new_path = path / "experiments" / directory_name
+    new_path = EXPERIMENT_FOLDER / directory_name
     new_path.mkdir(exist_ok=True)
     return new_path
 

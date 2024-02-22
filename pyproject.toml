@@ -11,18 +11,15 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.9, <3.11"
-sciplot = "^0.8.1"
 matplotlib = "^3.7.1"
 numpy = "^1.24.3"
-qdax = "^0.2.2"
 ase = "^3.22.1"
 mp-api = "^0.33.3"
-pylint = "^2.17.4"
 matgl = "^0.7.0"
-torch = "^2.0.1"
+dgl = "1.1.3"
 tqdm = "^4.65.0"
 megnet = "^1.3.2"
-tensorflow = "2.13.0"
+tensorflow = "^2.15.0"
 spglib = "^2.0.2"
 imageio = "^2.31.1"
 pyxtal = "^0.5.8"
@@ -30,19 +27,28 @@ pandas = "^2.0.3"
 vtk = "^9.2.6"
 chemview = "^0.6"
 pillow = "10.1.0"
-seaborn = "^0.12.2"
-ribs = "^0.5.2"
-black = "^23.7.0"
 scienceplots = "^2.1.0"
-click = "^8.1.7"
-chgnet = "0.2.0"
-mpcontribs-client = "^5.6.0"
+chgnet = "0.3.4"
 pyshtools = ">4.10, <4.11"
-
+gdown = "^5.1.0"
+pymatgen = "^2023.9.25"
+pydantic = "1.10.14"
+nvidia-ml-py3 = "*"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.3.1"
+pylint = "^2.17.4"
+black = "^23.7.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+map-elites = "qd4csp.cli.map_elites.map_elites_main:run_map_elites_experiment"
+download-data = "qd4csp.cli.reproduce_paper.download_data:download_data_folder"
+prepare-reference-data = "qd4csp.cli.map_elites.prepare_reference_data:prepare_reference_data"
+add-new-reference = "qd4csp.cli.map_elites.prepare_reference_data:create_new_reference_material"
+reproduce-results = "qd4csp.cli.reproduce_paper.reproduce_paper_results:reproduce_results"
+plot-experiment = "qd4csp.cli.utils.all_plots_for_single_experiment:plot_all_metrics_for_experiment_cli"
+generate-config = "qd4csp.cli.utils.generate_pre_filled_config:generate_config"

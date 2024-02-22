@@ -17,7 +17,7 @@ class BatchedStructureOptimizer:
     def __init__(self, batch_size: int = 10, fmax_threshold: float = 0.2):
         self.overriden_optimizer = OverridenFire()
         self.atoms_filter = AtomsFilterForRelaxation()
-        self.model = CHGNet.load()
+        self.model = CHGNet.load('0.2.0')
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(self.device)
         self.batch_size = batch_size
@@ -183,7 +183,9 @@ class BatchedStructureOptimizer:
         indices_to_update = []
         try:
             graphs = [
-                self.model.graph_converter(struct, on_isolated_atoms="warn")
+                self.model.graph_converter(struct,
+                                           # on_isolated_atoms="warn"
+                                           )
                 for struct in list_of_structures
             ]
         except SystemExit:
@@ -191,7 +193,9 @@ class BatchedStructureOptimizer:
             for i, struct in enumerate(list_of_structures):
                 try:
                     graphs.append(
-                        self.model.graph_converter(struct, on_isolated_atoms="warn")
+                        self.model.graph_converter(struct,
+                                                   # on_isolated_atoms="warn",
+                                                   )
                     )
                 except SystemExit:
                     hotfix_graphs = True
@@ -237,7 +241,9 @@ class BatchedStructureOptimizer:
 
     def is_structure_graph_valid(self, structure: Structure) -> bool:
         try:
-            self.model.graph_converter(structure, on_isolated_atoms="warn")
+            self.model.graph_converter(structure,
+                                       # on_isolated_atoms="warn"
+                                       )
             return True
         except SystemExit:
             return False

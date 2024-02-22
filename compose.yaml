@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  qd4csp:
+    build: .
+    volumes:
+      - ./experiments:/workdir/experiments
+      - ./experiment_configs:/workdir/experiment_configs
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    environment:
+      - EXPERIMENT_FOLDER=/workdir/experiments
+    command: poetry run map-elites
+
+  reproduce-results:
+    build: .
+    volumes:
+      - ./experiments:/workdir/experiments
+      - ./experiment_configs:/workdir/experiment_configs
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    environment:
+      - MP_API_KEY=2TD6Eww378QZDwYzMuPqT9eAtJOY2YSc
+    command: poetry run download-data | repoetry run reproduce-results

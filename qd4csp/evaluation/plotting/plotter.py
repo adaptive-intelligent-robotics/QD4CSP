@@ -15,7 +15,6 @@ from qd4csp.evaluation.confidence_levels import ConfidenceLevels
 from qd4csp.map_elites.archive import Archive
 from qd4csp.evaluation.plotting.utils import get_voronoi_finite_polygons_2d
 
-import scienceplots
 plt.rcParams["savefig.dpi"] = 300
 
 class CVTPlotting:
@@ -162,10 +161,16 @@ class CVTPlotting:
         ax.set_ylabel(f"{self.axis_labels[1]}")
 
         if self.overload_x_axis_limits is not None and self.overload_y_axis_limits is not None:
+            np.set_printoptions(2)
             x_tick_labels = np.linspace(self.overload_x_axis_limits[0], self.overload_x_axis_limits[1], 6)
+            x = np.linspace(0, 1, 6)
+            ax.set_xticks(x, labels=["{:.1f}".format(value) for value in x_tick_labels])
+
             y_tick_labels = np.linspace(self.overload_y_axis_limits[0], self.overload_y_axis_limits[1], 6)
-            ax.set_xticklabels([np.around(el, 1) for el in x_tick_labels])
-            ax.set_yticklabels([np.around(el, 1) for el in y_tick_labels])
+            y = np.linspace(0, 1, 6)
+            ax.set_yticks(y, labels=["{:.1f}".format(value) for value in x_tick_labels])
+            # ax.set_xticklabels([np.around(el, 1) for el in x_tick_labels])
+            # ax.set_yticklabels([np.around(el, 1) for el in y_tick_labels])
 
         if title is not None:
             ax.set_title(title)
@@ -265,7 +270,7 @@ class CVTPlotting:
             polygon = self.vertices[region]
             if i in target_centroid_ids:
                 target_centroid_energy = target_centroid_energies[
-                    np.argwhere(target_centroid_ids == i)
+                    np.argwhere(np.array(target_centroid_ids) == i)
                 ].reshape(-1)[0]
                 if i in archive.centroid_ids:
                     centroid_energy = archive.fitnesses[

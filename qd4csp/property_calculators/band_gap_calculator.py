@@ -4,10 +4,8 @@ import matgl
 import torch
 from matgl.ext.pymatgen import Structure2Graph
 from matgl.graph.compute import compute_pair_vector_and_distance
-from mp_api.client import MPRester
 from pymatgen.core import Structure
 
-from qd4csp.utils.env_variables import MP_API_KEY
 from qd4csp.utils.utils import normalise_between_0_and_1
 
 
@@ -79,18 +77,3 @@ class BandGapCalculator:
 
         model_output = model_output.detach()
         return model_output, gradient_wrt_positions
-
-
-if __name__ == "__main__":
-    shear_calculator = BandGapCalculator()
-
-    with MPRester(api_key=MP_API_KEY) as mpr:
-        structure = mpr.get_structure_by_material_id("mp-1840", final=True)
-    bg_no_grad, _ = shear_calculator.compute(
-        structure, compute_gradients=False, band_gap_type=torch.tensor([3])
-    )
-    bg_with_grad, gradient = shear_calculator.compute(
-        structure, compute_gradients=True, band_gap_type=torch.tensor([3])
-    )
-    assert bg_no_grad == bg_with_grad
-    print(gradient)

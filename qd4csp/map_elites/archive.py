@@ -178,22 +178,15 @@ class Archive:
         reference_data = pd.read_csv(target_data_path)
         reference_data.index = reference_data["Unnamed: 0"].to_list()
         reference_data.drop(columns="Unnamed: 0", inplace=True)
-        energy, band_gap, shear_modulus, fmax, _ = reference_data.to_numpy()
+        energy, band_gap, shear_modulus, fmax = reference_data.to_numpy()
         labels = list(reference_data.columns)
-        if normalise_bd_values is not None:
-            band_gap = normalise_between_0_and_1(
-                band_gap, (normalise_bd_values[0][0], normalise_bd_values[1][0])
-            )
-            shear_modulus = normalise_between_0_and_1(
-                shear_modulus, (normalise_bd_values[0][1], normalise_bd_values[1][1])
-            )
 
         descriptors = np.vstack([band_gap, shear_modulus]).T
         centroids = reassign_data_from_pkl_to_new_centroids(
             centroids_file=centroids_path,
             target_data=(energy, None, descriptors, None),
             filter_for_number_of_atoms=None,
-            normalise_bd_values=None,
+            normalise_bd_values=normalise_bd_values,
         )
 
         with MPRester(api_key=MP_API_KEY) as mpr:
