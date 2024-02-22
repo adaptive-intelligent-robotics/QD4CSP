@@ -39,30 +39,34 @@ def create_new_reference_material():
     parser.add_argument(
         "-e",
         "--element_list",
+        nargs="+",
         help="List of elements in material e.g. [Ti, O]",
-        type=List[str],
+        type=str,
     )
 
     parser.add_argument(
         "-a",
-        "--atoms_counts",
+        "--atom_counts",
+        nargs="+",
         help="List of counts of each atom e.g. [2, 4]",
-        type=List[str],
+        type=int,
     )
 
     parser.add_argument(
         "-fl",
         "--fitness_limits",
+        nargs="+",
         help="Optional. Desired fitness limits for plottin in format [minimum_value, maximum_value].",
-        type=Tuple[float, float],
+        type=float,
         default=None,
     )
 
     parser.add_argument(
         "-b",
         "--band_gap_limits",
+        nargs="+",
         help="Optional. Desired band gap limits for plotting in format [minimum_value, maximum_value].",
-        type=Tuple[float, float],
+        type=float,
         default=None,
     )
 
@@ -70,7 +74,8 @@ def create_new_reference_material():
         "-s",
         "--shear_modulus_limits",
         help="Optional. Desired shear modulus limits for plotting in format [minimum_value, maximum_value].",
-        type=Tuple[float, float],
+        nargs="+",
+        type=float,
         default=None,
     )
 
