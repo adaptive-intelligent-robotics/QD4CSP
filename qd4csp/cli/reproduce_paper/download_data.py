@@ -1,3 +1,4 @@
+import os
 import shutil
 from zipfile import ZipFile
 
@@ -16,4 +17,4 @@ def download_data_folder():
         zObject.extractall(path=EXPERIMENT_FOLDER)
 
     shutil.rmtree(EXPERIMENT_FOLDER / "__MACOSX")
-    shutil.rmtree(EXPERIMENT_FOLDER / filename)
+    os.remove(EXPERIMENT_FOLDER / filename)

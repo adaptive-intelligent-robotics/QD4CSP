@@ -36,6 +36,4 @@ COPY mp_reference_analysis /workdir/mp_reference_analysis
 
 RUN poetry install --without dev
 
-# set poetry to not create a venv since docker image provides a suitable venv
-
 #ENTRYPOINT ["poetry", "shell"]
