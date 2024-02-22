@@ -270,7 +270,7 @@ class CVTPlotting:
             polygon = self.vertices[region]
             if i in target_centroid_ids:
                 target_centroid_energy = target_centroid_energies[
-                    np.argwhere(target_centroid_ids == i)
+                    np.argwhere(np.array(target_centroid_ids) == i)
                 ].reshape(-1)[0]
                 if i in archive.centroid_ids:
                     centroid_energy = archive.fitnesses[

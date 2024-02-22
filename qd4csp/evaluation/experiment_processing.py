@@ -241,7 +241,7 @@ class ExperimentProcessor:
         target_data_path = (
             MP_REFERENCE_FOLDER
             / f"{self.formula}_{number_of_atoms}"
-            / f"{self.formula}_target_data_{centroid_tag}.csv"
+            / f"{self.formula}_target_data.csv"
         )
         if not os.path.isfile(target_data_path):
             target_data_path = None
@@ -259,7 +259,7 @@ class ExperimentProcessor:
             else None
         )
 
-        tareget_archive = Archive.from_reference_csv_path(
+        target_archive = Archive.from_reference_csv_path(
             target_data_path,
             normalise_bd_values=normalise_bd_values,
             centroids_path=self.centroid_directory_path,
@@ -267,7 +267,7 @@ class ExperimentProcessor:
         symmetry_evaluation = StructureEvaluation(
             formula=self.formula,
             filter_for_experimental_structures=self.filter_for_experimental_structures,
-            reference_data_archive=tareget_archive,
+            reference_data_archive=target_archive,
         )
         all_individual_indices_to_check = None
 
@@ -323,10 +323,8 @@ class ExperimentProcessor:
             energy_data = CVTPlottingData.for_energy_comparison(
                 archive=archive,
                 plotting_matches=plotting_from_archive,
-                target_centroid_ids=np.array(
-                    symmetry_evaluation.reference_data.loc["centroid_id"].array),
-                target_centroid_energies=np.array(
-                    symmetry_evaluation.reference_data.loc["energy"].array),
+                target_centroid_ids=target_archive.centroid_ids,
+                target_centroid_energies=target_archive.fitnesses
             )
 
             self.plotter.plot(
@@ -339,8 +337,10 @@ class ExperimentProcessor:
             unique_reference_match_data = CVTPlottingData.for_reference_matching(
                 plotting_matches=plotting_from_mp,
                 target_centroid_ids=symmetry_evaluation.reference_data.loc["centroid_id"].array,
-                reference_shear_moduli=[symmetry_evaluation.reference_data.loc["shear_modulus"][ref] for ref in plotting_from_mp.mp_references],
-                reference_band_gaps=[symmetry_evaluation.reference_data.loc["band_gap"][ref] for ref in plotting_from_mp.mp_references],
+                reference_shear_moduli=[symmetry_evaluation.reference_data.loc["shear_modulus"][ref] for ref in
+                                        plotting_from_mp.mp_references],
+                reference_band_gaps=[symmetry_evaluation.reference_data.loc["band_gap"][ref] for ref in
+                                     plotting_from_mp.mp_references],
             )
             self.plotter.plot(
                 ax=figure_manager.plot_to_axes_mapping[PlotTypes.UNIQUE_MATCHES],
@@ -351,7 +351,7 @@ class ExperimentProcessor:
 
             all_reference_match_data = CVTPlottingData.for_reference_matching(
                 plotting_matches=plotting_from_archive,
-                target_centroid_ids=symmetry_evaluation.reference_data.loc["centroid_id"].array,
+                target_centroid_ids=target_archive.centroid_ids,
                 reference_shear_moduli=None,
                 reference_band_gaps=None,
             )

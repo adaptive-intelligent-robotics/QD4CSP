@@ -2,7 +2,7 @@ import shutil
 
 from qd4csp.reference_setup.reference_analyser import ReferenceAnalyser
 from qd4csp.utils.env_variables import MP_REFERENCE_FOLDER, EXPERIMENT_FOLDER
-from qd4csp.cli.all_plots_for_single_experiment import \
+from qd4csp.cli.utils.all_plots_for_single_experiment import \
     plot_all_metrics_and_cvt_for_experiment
 from qd4csp.evaluation.average_statistics_generator import \
     AverageStatisticsGenerator
@@ -43,6 +43,31 @@ def reproduce_results():
     print("Plotting mean TiO2 results: Figures 4, 5, 7")
     plot_all_metrics_and_cvt_for_experiment(
         path_to_reproduce_results / "TiO2/TiO2_benchmark_with_high_threshold/20240201_09_04_TiO2_benchmark_1_9"
+    )
+
+    shutil.copy(
+        src=path_to_reproduce_results / "TiO2/TiO2_benchmark_with_high_threshold/20240201_09_04_TiO2_benchmark_1_9/cvt_plot_5000.png",
+        dst=path_to_reproduce_results / "reported_figures/main_figure_4.png",
+    )
+
+    shutil.copy(
+        src=path_to_reproduce_results / "TiO2/TiO2_benchmark_with_high_threshold/20240201_09_04_TiO2_benchmark_1_9/cvt_matches_from_archive_archive_matches_view.png",
+        dst=path_to_reproduce_results / "reported_figures/main_figure_5a.png",
+    )
+
+    shutil.copy(
+        src=path_to_reproduce_results / "TiO2/TiO2_benchmark_with_high_threshold/20240201_09_04_TiO2_benchmark_1_9/cvt_energy_diff_matches_from_archive_archive_matches_view.png",
+        dst=path_to_reproduce_results / "reported_figures/main_figure_5b.png",
+    )
+
+    shutil.copy(
+        src=path_to_reproduce_results / "TiO2/TiO2_benchmark_with_high_threshold/20240201_09_04_TiO2_benchmark_1_9/cvt_matches_from_archive_mp_reference_view.png",
+        dst=path_to_reproduce_results / "reported_figures/main_figure_5c.png",
+    )
+
+    shutil.copy(
+        src=path_to_reproduce_results / "TiO2/TiO2_benchmark_with_high_threshold/20240201_09_04_TiO2_benchmark_1_9/cvt_matches_from_archive_mp_reference_view.png",
+        dst=path_to_reproduce_results / "reported_figures/main_figure_7.png]",
     )
 
     print("Computing average match performance for TiO2: section 4.2")
@@ -158,6 +183,7 @@ def reproduce_results():
             "\n"
             "TiO2 averaged: reproduce_results/TiO2/all_plots/ \n"
             "TiO2 archive: reproduce_results/TiO2/TiO2_benchmark_with_high_threshold/ \n"
+            "TiO2 structures (cif files + images): reproduce_results/TiO2/TiO2_benchmark_with_high_threshold/ \n"
             "TiO2 reference info: mp_reference_analysis/TiO2_24/plots \n"
             "SiO2 archive: reproduce_results/SiO2/SiO2_like_benchmark_with_high_threshold/20240202_02_31_SiO2_SiO2_like_benchmark_with_high_threshold_1 \n"
             "SiC archive: reproduce_results/SiC/SiC_like_benchmark_with_high_threshold/20240202_01_53_SiC_SiC_like_benchmark_with_high_threshold_10 \n"

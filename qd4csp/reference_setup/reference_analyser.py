@@ -296,24 +296,22 @@ class ReferenceAnalyser:
             ) as file:
                 pickle.dump(all_data, file)
 
-            centroid_tag = str(self.centroid_filename[1:].split("/")[1].rstrip(".dat"))
-            filename = f"{self.formula}_target_data_{centroid_tag}.csv"
             df = pd.DataFrame(
                 [
                     self.reference_ids,
                     self.energies,
-                    descriptors[:, 0],
-                    descriptors[:, 1],
+                    self.band_gaps,
+                    self.shear_moduli,
                     self.fmax_list,
-                    target_archive.centroid_ids,
                 ]
             )
             df.columns = df.iloc[0]
             df = df[1:]
             df = df.reset_index(drop=True)
-            df.index = ["energy", "band_gap", "shear_modulus", "fmax", "centroid_id"]
-            df.to_csv(self.save_path / filename)
-
+            df.index = ["energy", "band_gap", "shear_modulus", "fmax",
+                        # "centroid_id",
+                        ]
+            df.to_csv(self.save_path / f"{self.formula}_target_data.csv")
         return target_archive
 
     def plot_cvt_plot(
@@ -690,9 +688,9 @@ if __name__ == "__main__":
     band_gap_limits = None
     shear_moduli_limits = None
 
-    elements_list = [["Si", "C"]]
-    atoms_counts_list = [[12, 12]]
-    formulas = ["SiC"]
+    elements_list = [["Ti", "O"]]
+    atoms_counts_list = [[8, 16]]
+    formulas = ["TiO2"]
     fitness_limits = [8.7, 9.5]
     band_gap_limits = [0, 4]
     shear_moduli_limits = [0, 120]

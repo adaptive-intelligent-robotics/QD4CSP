@@ -8,9 +8,9 @@ def prepare_reference_data():
     atoms_counts_list = [[24], [8, 16], [12, 12], [8, 16]]
     formulas = ["C", "SiO2", "SiC", "TiO2"]
 
-    fitness_limits = None
-    band_gap_limits = None
-    shear_moduli_limits = None
+    fitness_limits = [[6.5, 9.5], [6.6, 8.3], [5.8, 7.8], [8.7, 9.5]]
+    band_gap_limits = [[0, 5.5], [0, 6.8], [0.2, 0.9], [0, 4]]
+    shear_moduli_limits = [[4, 535], [25, 222], [170, 185], [0, 120]]
 
     for filter_experiment in [False]:
         for i, formula in enumerate(formulas):
@@ -21,9 +21,9 @@ def prepare_reference_data():
                 max_n_atoms_in_cell=sum(atoms_counts_list[i]),
                 experimental_references_only=filter_experiment,
                 number_of_centroid_niches=200,
-                fitness_limits=fitness_limits,
-                band_gap_limits=band_gap_limits,
-                shear_modulus_limits=shear_moduli_limits,
+                fitness_limits=fitness_limits[i],
+                band_gap_limits=band_gap_limits[i],
+                shear_modulus_limits=shear_moduli_limits[i],
             )
 
 
