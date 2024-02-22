@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
-from typing import List, Tuple
 
 from qd4csp.reference_setup.reference_analyser import ReferenceAnalyser
+
 
 def prepare_reference_data():
     elements_list = [["C"], ["Si", "O"], ["Si", "C"], ["Ti", "O"]]

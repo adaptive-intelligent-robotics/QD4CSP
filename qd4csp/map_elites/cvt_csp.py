@@ -7,7 +7,6 @@ import pickle
 from typing import Any, Dict
 
 import numpy as np
-import psutil
 from ase import Atoms
 from chgnet.graph import CrystalGraphConverter
 from pymatgen.io.ase import AseAtomsAdaptor

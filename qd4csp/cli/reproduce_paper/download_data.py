@@ -2,7 +2,6 @@ import shutil
 from zipfile import ZipFile
 
 import gdown
-import requests
 
 from qd4csp.utils.env_variables import EXPERIMENT_FOLDER
 

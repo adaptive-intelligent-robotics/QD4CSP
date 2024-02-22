@@ -420,11 +420,3 @@ class AverageStatisticsGenerator:
                 list_of_experiments=sub_experiments_list,
                 directory_to_save=directory_to_save,
             )
-
-if __name__ == '__main__':
-    report_generator = AverageStatisticsGenerator(
-        path_to_experiments=Path(__file__).parent.parent
-        / f".experiments.nosync/reported_results/TiO2/",
-    )
-
-    report_generator.compute_average_match_performance_for_all_experiments()
