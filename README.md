@@ -22,8 +22,7 @@ Then enter the correct directory on your machine:
 ```bash
 cd QD4CSP
 ```
-We provide two installation methods, one using poetry (preferred) and using standard `requirements.txt`.
-Using poetry enables the use of our cli. 
+We provide two installation methods, one using poetry and one using docker.
 
 #### Option 1: Poetry [Recommended]
 This package uses [poetry](https://python-poetry.org) dependency manager. 
@@ -32,7 +31,7 @@ To install all dependencies run:
 poetry install
 ```
 
-#### Option 2: Python virtual environments
+#### Option 2: Docker
 Once you have cloned the repository, create and activate your virtual environment:
 ```shell
 python3 -m venv ./venv
@@ -54,6 +53,7 @@ Then add your API key as an environment variable like so:
 export MP_API_KEY=<your-api-key>
 ```
 
+or if using docker update the `MP_API_KEY` field in the `compose.yml` file.
 #### [Optional] `CHGNet`
 This step is optional but ensures significant speed improvements.
 

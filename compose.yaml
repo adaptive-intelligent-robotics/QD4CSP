@@ -9,8 +9,16 @@ services:
     stdin_open: true # docker run -i
     tty: true # docker run -t
     environment:
-      - EXPERIMENT_FOLDER=/workdir/experiments
-      - MP_REFERENCE_FOLDER=/workdir/mp_reference_analysis
-      - CONFIGS_FOLDER =/workdir/experiment_configs
-      - MP_API_KEY=<your-api-key-here>
-#    command: map-elites
+      - MP_API_KEY=2TD6Eww378QZDwYzMuPqT9eAtJOY2YSc
+    command: poetry run map-elites
+
+  reproduce-results:
+    build: .
+    volumes:
+      - ./experiments:/workdir/experiments
+      - ./experiment_configs:/workdir/experiment_configs
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    environment:
+      - MP_API_KEY=2TD6Eww378QZDwYzMuPqT9eAtJOY2YSc
+    command: poetry run download-data | repoetry run reproduce-results
