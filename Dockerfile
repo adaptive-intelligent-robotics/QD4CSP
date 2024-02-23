@@ -24,6 +24,10 @@ WORKDIR /workdir
 
 RUN apt-get install -y python3-vtk7
 
+ARG VENV_LOCATION=$(poetry env info -p)/lib/python3.9/site-packages/chgnet/graph
+COPY .chgnet_compilation_files/cygraph.c $VENV_LOCATION/cygraph.c
+COPY .chgnet_compilation_files/cygraph.pyx $VENV_LOCATION/cygraph.pyx
+
 # copy required files into docker image
 COPY pyproject.toml /workdir/pyproject.toml
 COPY poetry.lock /workdir/poetry.lock
@@ -35,5 +39,3 @@ COPY qd4csp /workdir/qd4csp
 COPY mp_reference_analysis /workdir/mp_reference_analysis
 
 RUN poetry install --without dev
-
-#ENTRYPOINT ["poetry", "shell"]
