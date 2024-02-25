@@ -32,25 +32,6 @@ To install all dependencies run:
 poetry install
 ```
 
-#### [Optional] `CHGNet GraphConverter`
-_This step is designed for poetry only, if using docker skip to the next section._
-
-This step is optional but ensures significant speed improvements.
-
-As guidelines were not available on the package at the time of writing we provide our method to ensure
-cython is set up correctly to be used with `CHGNet`. 
-For convenience, we have precompiled the required files, so simply run:
-```shell
-cp .chgnet_compilation_files/* $(poetry env info -p)/lib/python3.9/site-packages/chgnet/graph/
-```
-NB: This command might need to be udpated to match your python version.
-
-You can verify that this by running a script containing the following:
-```shell
-poetry run chgnet-speed
-```
-The expected output is _fast_ if set up was completed correctly.
-
 #### [Optional] Setting up Environment Variables
 This repo relies on 4 environment variables:
 * `EXPERIMENT_FOLDER`
