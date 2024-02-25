@@ -159,13 +159,9 @@ docker compose run reproduce-results
 You can also use the docker image interactively to run any of the commands described in the _poetry_ section above. 
 To do so first start the container:
 ```shell
-docker compose up qd4csp
+docker compose run qd4csp sh
 ```
-Then get the container id by running:
+Then use the container 
 ```shell
 docker container list
-```
-And finally execute:
-```shell
-docker exec -it <container_id> sh
 ```

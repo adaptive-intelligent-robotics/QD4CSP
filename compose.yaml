@@ -20,8 +20,8 @@ services:
     tty: true # docker run -t
     environment:
       - MP_API_KEY=${MP_API_KEY}
-      - EXP=""
-    command: poetry run map-elites -e $EXP
+      - EXP="experiment_configs/demo.json"
+    command: poetry run map-elites $EXP
 
   reproduce-results:
     build: .
@@ -31,4 +31,9 @@ services:
     tty: true # docker run -t
     environment:
       - MP_API_KEY=${MP_API_KEY}
-    command: poetry run download-data | poetry run reproduce-results
+    command:
+      - /bin/bash
+      - -c
+      - |
+        poetry run download-data
+        poetry run reproduce-results
