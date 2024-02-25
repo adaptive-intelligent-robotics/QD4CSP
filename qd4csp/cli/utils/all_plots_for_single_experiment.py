@@ -46,8 +46,7 @@ def plot_all_metrics_and_cvt_for_experiment(
 def plot_all_metrics_for_experiment_cli():
     parser = ArgumentParser()
     parser.add_argument(
-        "-e",
-        "--experiment",
+        "experiment",
         help="Path to experiment that requires plotting."
     )
 
