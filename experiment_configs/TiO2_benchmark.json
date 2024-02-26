@@ -39,7 +39,7 @@
   "n_behavioural_descriptor_dimensions": 2,
   "number_of_niches": 200,
   "maximum_evaluations": 5000,
-  "experiment_tag": "benchmark_1_1",
+  "experiment_tag": "benchmark",
   "fitness_min_max_values": [
     8.7,
     9.5

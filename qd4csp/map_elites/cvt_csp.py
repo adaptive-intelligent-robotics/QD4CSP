@@ -7,7 +7,6 @@ import pickle
 from typing import Any, Dict
 
 import numpy as np
-import psutil
 from ase import Atoms
 from chgnet.graph import CrystalGraphConverter
 from pymatgen.io.ase import AseAtomsAdaptor
@@ -35,7 +34,7 @@ class CVTMAPElites:
         self.number_of_bd_dimensions = number_of_bd_dimensions
         self.crystal_system = crystal_system
         self.crystal_evaluator = crystal_evaluator
-        self.graph_converter = CrystalGraphConverter()
+        self.graph_converter = CrystalGraphConverter(on_isolated_atoms="warn")
 
     def _initialise_run_parameters(
         self, number_of_niches: int, maximum_evaluations: int,
@@ -45,12 +44,6 @@ class CVTMAPElites:
         self.log_file = open(
             f"{self.experiment_directory_path}/{experiment_label}.dat", "w"
         )
-        self.memory_log = open(f"{self.experiment_directory_path}/memory_log.dat", "w")
-        with open(
-            f"{self.experiment_directory_path}/experiment_parameters.pkl", "wb"
-        ) as file:
-            pickle.dump(run_parameters, file)
-
         self.archive = {}  # init archive (empty)
         self.n_evals = 0  # number of evaluations since the beginning
         self.b_evals = 0  # number evaluation since the last dump
@@ -70,12 +63,13 @@ class CVTMAPElites:
             run_parameters["relax_every_n_generations"]
             if "relax_every_n_generations" in run_parameters.keys()
             else 0
-        )
+        ) # if used this allows individuals to be relaxed every n generations,
+        # otherwise unrelaxed individuals are added ot archive
         self.relax_archive_every_n_generations = (
             run_parameters["relax_archive_every_n_generations"]
             if "relax_archive_every_n_generations" in run_parameters.keys()
             else 0
-        )
+        ) # if used this relaxes all individuals in the archive every n generations
         self.generation_counter = 0
         self.run_parameters = run_parameters
 
@@ -198,9 +192,6 @@ class CVTMAPElites:
                             )
                         )
                         self.log_file.flush()
-                    memory = psutil.virtual_memory()[3] / 1000000000
-                    self.memory_log.write("{} {}\n".format(self.n_evals, memory))
-                    self.memory_log.flush()
                     gc.collect()
 
     def _initialise_kdt_and_centroids(
@@ -241,7 +232,8 @@ class CVTMAPElites:
             z = self.crystal_system.mutate([x, y])
             if z is None or (
                 self.graph_converter(
-                    AseAtomsAdaptor.get_structure(z), on_isolated_atoms="warn"
+                    AseAtomsAdaptor.get_structure(z),
+                    # on_isolated_atoms="warn"
                 )
                 is None
             ):
@@ -250,6 +242,10 @@ class CVTMAPElites:
         return mutated_offsprings
 
     def _set_number_of_relaxation_steps(self):
+        """Set number of relaxation steps per individual.
+
+        If
+        """
         if self.relax_every_n_generations != 0 and (
             self.relax_archive_every_n_generations == 0
         ):

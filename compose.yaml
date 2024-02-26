@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  qd4csp:
+    image:
+      qd4csp
+    volumes:
+      - ./experiments:/workdir/experiments
+      - ./experiment_configs:/workdir/experiment_configs
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    environment:
+      - MP_API_KEY=${MP_API_KEY}
+
+  map-elites:
+    image:
+      qd4csp
+    volumes:
+      - ./experiments:/workdir/experiments
+      - ./experiment_configs:/workdir/experiment_configs
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    environment:
+      - MP_API_KEY=${MP_API_KEY}
+      - EXP="experiment_configs/demo.json"
+    command: poetry run map-elites $EXP
+
+  reproduce-results:
+    image:
+      qd4csp
+    volumes:
+      - ./experiments:/workdir/experiments
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    environment:
+      - MP_API_KEY=${MP_API_KEY}
+    command:
+      - /bin/bash
+      - -c
+      - |
+        poetry run download-data
+        poetry run reproduce-results

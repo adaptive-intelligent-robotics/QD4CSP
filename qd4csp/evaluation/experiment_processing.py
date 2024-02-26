@@ -9,6 +9,7 @@ from tqdm import tqdm
 
 from qd4csp.crystal.materials_data_model import MaterialProperties, \
     StartGenerators
+from qd4csp.evaluation.confidence_levels import ConfidenceLevels
 from qd4csp.evaluation.plotting.figure_manager import FigureManager
 from qd4csp.evaluation.plotting.plotter import CVTPlotting
 from qd4csp.evaluation.plotting.plotting_data_model import CVTPlottingData, \
@@ -117,7 +118,11 @@ class ExperimentProcessor:
     def plot(self,
              annotate: bool = True, force_replot: bool = False):
         self._plot_all_maps_in_archive(annotate=annotate, force_replot=force_replot)
-        plot_gif(experiment_directory_path=str(self.experiment_directory_path))
+        try:
+            plot_gif(experiment_directory_path=str(self.experiment_directory_path))
+        except ValueError:
+            print("Gif could not be plotted due to different plot sizes, "
+                  "rerun function with force_replot = True")
         plot_all_statistics_from_file(
             filename=f"{self.experiment_directory_path}/{self.experiment_label}.dat",
             save_location=f"{self.experiment_directory_path}/",
@@ -237,7 +242,7 @@ class ExperimentProcessor:
         target_data_path = (
             MP_REFERENCE_FOLDER
             / f"{self.formula}_{number_of_atoms}"
-            / f"{self.formula}_target_data_{centroid_tag}.csv"
+            / f"{self.formula}_target_data.csv"
         )
         if not os.path.isfile(target_data_path):
             target_data_path = None
@@ -255,7 +260,7 @@ class ExperimentProcessor:
             else None
         )
 
-        tareget_archive = Archive.from_reference_csv_path(
+        target_archive = Archive.from_reference_csv_path(
             target_data_path,
             normalise_bd_values=normalise_bd_values,
             centroids_path=self.centroid_directory_path,
@@ -263,7 +268,8 @@ class ExperimentProcessor:
         symmetry_evaluation = StructureEvaluation(
             formula=self.formula,
             filter_for_experimental_structures=self.filter_for_experimental_structures,
-            reference_data_archive=tareget_archive,
+            reference_data_archive=target_archive,
+            enable_structure_visualiser=self.save_structure_images,
         )
         all_individual_indices_to_check = None
 
@@ -308,6 +314,26 @@ class ExperimentProcessor:
                 plotting_from_mp,
             ) = symmetry_evaluation.matches_for_plotting(individuals_with_matches)
 
+            if self.save_structure_images:
+                individual_indices_with_unique_matches = [
+                    np.argwhere(archive.descriptors == el)[0][0]
+                    for el in plotting_from_mp.descriptors
+                ]
+
+                file_tags = [
+                    plotting_from_mp.mp_references[i] + "_" +
+                    ConfidenceLevels.get_string(plotting_from_mp.confidence_levels[i]).lower().replace(" ", "")
+                    for i in range(len(plotting_from_mp.mp_references))
+                ]
+
+                symmetry_evaluation.save_structure_visualisations(
+                    archive=archive,
+                    structure_indices=individual_indices_with_unique_matches,
+                    directory_to_save=self.experiment_directory_path,
+                    file_tags=file_tags,
+                    save_primitive=True,
+                )
+
             report_statistic_summary_dict = (
                 symmetry_evaluation.write_report_summary_json(
                     plotting_matches_from_archive=plotting_from_archive,
@@ -319,10 +345,8 @@ class ExperimentProcessor:
             energy_data = CVTPlottingData.for_energy_comparison(
                 archive=archive,
                 plotting_matches=plotting_from_archive,
-                target_centroid_ids=np.array(
-                    symmetry_evaluation.reference_data.loc["centroid_id"].array),
-                target_centroid_energies=np.array(
-                    symmetry_evaluation.reference_data.loc["energy"].array),
+                target_centroid_ids=target_archive.centroid_ids,
+                target_centroid_energies=target_archive.fitnesses
             )
 
             self.plotter.plot(
@@ -335,8 +359,10 @@ class ExperimentProcessor:
             unique_reference_match_data = CVTPlottingData.for_reference_matching(
                 plotting_matches=plotting_from_mp,
                 target_centroid_ids=symmetry_evaluation.reference_data.loc["centroid_id"].array,
-                reference_shear_moduli=[symmetry_evaluation.reference_data.loc["shear_modulus"][ref] for ref in plotting_from_mp.mp_references],
-                reference_band_gaps=[symmetry_evaluation.reference_data.loc["band_gap"][ref] for ref in plotting_from_mp.mp_references],
+                reference_shear_moduli=[symmetry_evaluation.reference_data.loc["shear_modulus"][ref] for ref in
+                                        plotting_from_mp.mp_references],
+                reference_band_gaps=[symmetry_evaluation.reference_data.loc["band_gap"][ref] for ref in
+                                     plotting_from_mp.mp_references],
             )
             self.plotter.plot(
                 ax=figure_manager.plot_to_axes_mapping[PlotTypes.UNIQUE_MATCHES],
@@ -347,7 +373,7 @@ class ExperimentProcessor:
 
             all_reference_match_data = CVTPlottingData.for_reference_matching(
                 plotting_matches=plotting_from_archive,
-                target_centroid_ids=symmetry_evaluation.reference_data.loc["centroid_id"].array,
+                target_centroid_ids=target_archive.centroid_ids,
                 reference_shear_moduli=None,
                 reference_band_gaps=None,
             )

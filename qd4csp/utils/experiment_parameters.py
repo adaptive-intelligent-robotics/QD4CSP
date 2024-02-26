@@ -1,5 +1,7 @@
 import json
+import pickle
 from dataclasses import dataclass, asdict
+from pathlib import Path
 from typing import List, Dict, Tuple, Any, Optional
 
 from ase.ga.utilities import CellBounds
@@ -103,7 +105,7 @@ class ExperimentParameters:
                 MaterialProperties.BAND_GAP,
                 MaterialProperties.SHEAR_MODULUS,
             ],  # currently only this combination is handled natively
-            # number of relaxation for lal individuals
+            # number of relaxation for all individuals
             "number_of_relaxation_steps": 0,
             # if seeding is used, the maximum number of atoms in structures to use
             "filter_starting_structures": 24,
@@ -111,7 +113,7 @@ class ExperimentParameters:
             "force_threshold": True,
             # value of force threshold
             "force_threshold_exp_fmax": 9.0,
-            # if whole archive is being relaxed
+            # take all individuals in archive and relax tehm every n every n generations
             "relax_archive_every_n_generations_n_relaxation_steps": 0,
             # fmax threshold for fire algorithm used in relaxation
             "fmax_threshold": 0.2,
@@ -132,6 +134,42 @@ class ExperimentParameters:
         with open(f"{experiment_directory_path}/{filename}.json", "w") as file:
             json.dump(asdict(self), file)
 
+    @classmethod
+    def from_config_json(cls, file_location: Path):
+        with open(file_location, "r") as file:
+            experiment_parameters = json.load(file)
+
+        experiment_parameters = cls(**experiment_parameters)
+        experiment_parameters.cellbounds = (
+            CellBounds(
+                bounds={
+                    "phi": [20, 160],
+                    "chi": [20, 160],
+                    "psi": [20, 160],
+                    "a": [2, 40],
+                    "b": [2, 40],
+                    "c": [2, 40],
+                }
+            ),
+        )
+        experiment_parameters.splits = {(2,): 1, (4,): 1}
+        experiment_parameters.cvt_run_parameters["behavioural_descriptors"] = [
+            MaterialProperties(value)
+            for value in
+            experiment_parameters.cvt_run_parameters["behavioural_descriptors"]
+        ]
+
+        experiment_parameters.start_generator = StartGenerators(
+            experiment_parameters.start_generator
+        )
+        return experiment_parameters
+
+    def dump_to_pickle(self, file_location: Path):
+        with open(file_location / "experiment_parameters.pkl", "wb") as file:
+            self.splits = "DUMMY"
+            self.cellbounds = "DUMMY"
+            pickle.dump(self, file)
+
     def return_min_max_bd_values(self):
         if self.cvt_run_parameters["normalise_bd"]:
             bd_minimum_values, bd_maximum_values = [0, 0], [1, 1]
@@ -140,5 +178,4 @@ class ExperimentParameters:
                 self.cvt_run_parameters["bd_minimum_values"],
                 self.cvt_run_parameters["bd_maximum_values"],
             )
-
         return bd_minimum_values, bd_maximum_values

@@ -1,6 +1,5 @@
 import copy
 import json
-import pathlib
 import pickle
 from collections import defaultdict
 from typing import Optional, Tuple, List, Union
@@ -14,7 +13,6 @@ from matplotlib import pyplot as plt
 from pymatgen.io.ase import AseAtomsAdaptor
 from pyxtal import pyxtal
 from pyxtal.msg import Comp_CompatibilityError
-from sklearn.neighbors import KDTree
 
 from qd4csp.crystal.crystal_evaluator import CrystalEvaluator
 from qd4csp.crystal.materials_data_model import MaterialProperties
@@ -23,7 +21,7 @@ from qd4csp.evaluation.plotting.plotting_data_model import CVTPlottingData
 from qd4csp.evaluation.symmetry_evaluator import StructureEvaluation
 from qd4csp.map_elites.archive import Archive
 from qd4csp.map_elites.cvt_centroids.initialise import \
-    __centroids_filename as get_centroids_filename, write_centroids, cvt, \
+    __centroids_filename as get_centroids_filename, \
     initialise_kdt_and_centroids
 from qd4csp.reference_setup.reference_plotter import ReferencePlotter
 from qd4csp.utils.asign_target_values_to_centroids import (
@@ -33,9 +31,6 @@ from qd4csp.utils.env_variables import EXPERIMENT_FOLDER, MP_REFERENCE_FOLDER
 from qd4csp.utils.experiment_parameters import ExperimentParameters
 from qd4csp.utils.utils import load_centroids, normalise_between_0_and_1
 
-import scienceplots
-
-plt.style.use("science")
 plt.rcParams["savefig.dpi"] = 300
 
 
@@ -298,24 +293,22 @@ class ReferenceAnalyser:
             ) as file:
                 pickle.dump(all_data, file)
 
-            centroid_tag = str(self.centroid_filename[1:].split("/")[1].rstrip(".dat"))
-            filename = f"{self.formula}_target_data_{centroid_tag}.csv"
             df = pd.DataFrame(
                 [
                     self.reference_ids,
                     self.energies,
-                    descriptors[:, 0],
-                    descriptors[:, 1],
+                    self.band_gaps,
+                    self.shear_moduli,
                     self.fmax_list,
-                    target_archive.centroid_ids,
                 ]
             )
             df.columns = df.iloc[0]
             df = df[1:]
             df = df.reset_index(drop=True)
-            df.index = ["energy", "band_gap", "shear_modulus", "fmax", "centroid_id"]
-            df.to_csv(self.save_path / filename)
-
+            df.index = ["energy", "band_gap", "shear_modulus", "fmax",
+                        # "centroid_id",
+                        ]
+            df.to_csv(self.save_path / f"{self.formula}_target_data.csv")
         return target_archive
 
     def plot_cvt_plot(
@@ -385,7 +378,7 @@ class ReferenceAnalyser:
         if self.save_plot:
             fig.savefig(
                 self.save_path / "plots"
-                / f"{self.formula}_fmax_histogram_no_stress{self.experimental_string}.png",
+                / f"{self.formula}_fmax_histogram_{self.experimental_string}.png",
                 format="png",
             )
         else:
@@ -644,9 +637,9 @@ class ReferenceAnalyser:
                 )
         else:
             reference_analyser.bd_minimum_values = np.array(
-                [band_gap_limits[0], shear_moduli_limits[0]])
+                [band_gap_limits[0], shear_modulus_limits[0]])
             reference_analyser.bd_maximum_values = np.array(
-                [band_gap_limits[1], shear_moduli_limits[1]])
+                [band_gap_limits[1], shear_modulus_limits[1]])
         reference_analyser.initialise_kdt_and_centroids(
             number_of_niches=number_of_centroid_niches,
             band_gap_limits=band_gap_limits,
@@ -678,37 +671,3 @@ class ReferenceAnalyser:
         reference_analyser.plot_fmax()
 
         return reference_analyser
-
-
-
-
-
-if __name__ == "__main__":
-    # elements_list = [["C"], ["Si", "O"], ["Si", "C"]]
-    # atoms_counts_list = [[24], [8, 16], [12, 12]]
-    # formulas = ["C", "SiO2", "SiC",]
-
-    fitness_limits = None
-    band_gap_limits = None
-    shear_moduli_limits = None
-
-    elements_list = [["Si", "C"]]
-    atoms_counts_list = [[12, 12]]
-    formulas = ["SiC"]
-    fitness_limits = [8.7, 9.5]
-    band_gap_limits = [0, 4]
-    shear_moduli_limits = [0, 120]
-
-    for filter_experiment in [False]:
-        for i, formula in enumerate(formulas):
-            ReferenceAnalyser.prepare_reference_data(
-                formula=formula,
-                elements_list=elements_list[i],
-                elements_counts_list=atoms_counts_list[i],
-                max_n_atoms_in_cell=sum(atoms_counts_list[i]),
-                experimental_references_only=filter_experiment,
-                number_of_centroid_niches=200,
-                fitness_limits=fitness_limits,
-                band_gap_limits=band_gap_limits,
-                shear_modulus_limits=shear_moduli_limits,
-            )

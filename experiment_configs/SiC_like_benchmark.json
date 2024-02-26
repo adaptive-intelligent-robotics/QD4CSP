@@ -67,7 +67,6 @@
       "shear_modulus"
     ],
     "number_of_relaxation_steps": 100,
-    "curiosity_weights": true,
     "filter_starting_structures": 24,
     "force_threshold": true,
     "normalise_bd": true,

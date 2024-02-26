@@ -62,7 +62,7 @@ class CrystalSystem:
         self.main_experiment_directory = EXPERIMENT_FOLDER
         self._possible_pyxtal_modes = self.load_possible_pyxtal_spacegroups()
 
-        self.graph_converter = CrystalGraphConverter()
+        self.graph_converter = CrystalGraphConverter(on_isolated_atoms="warn")
 
     def load_possible_pyxtal_spacegroups(self):
         reference_tag = (
@@ -102,7 +102,6 @@ class CrystalSystem:
             individual = AseAtomsAdaptor.get_atoms(self._start_generator.to_pymatgen())
 
         individual.info["confid"] = individual_id
-        individual.info["curiosity"] = 0
         return individual
 
     def create_n_individuals(
@@ -115,7 +114,7 @@ class CrystalSystem:
                 if (
                     self.graph_converter(
                         AseAtomsAdaptor.get_structure(atoms=new_individual),
-                        on_isolated_atoms="warn",
+                        # on_isolated_atoms="warn",
                     )
                     is not None
                 ):

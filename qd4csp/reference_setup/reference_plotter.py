@@ -1,9 +1,7 @@
 import matplotlib
 import numpy as np
 from matplotlib import pyplot as plt
-import scienceplots
 
-plt.style.use("science")
 plt.rcParams["savefig.dpi"] = 300
 
 
@@ -157,5 +155,4 @@ class ReferencePlotter:
         plt.title(
             "Minimum Non-Zero Cosine Distance Between Reference Structures Across References"
         )
-        plt.show()
-        # plt.savefig(pathlib.Path(__file__).parent.parent / "report_figures" / "reference_data_analysis" / f"distances_histogram_{experimental_string}.png", format="png")
+        plt.savefig(Path(__file__).parent.parent / "report_figures" / "reference_data_analysis" / f"distances_histogram_{experimental_string}.png", format="png")
