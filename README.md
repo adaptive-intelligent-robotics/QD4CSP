@@ -137,6 +137,12 @@ alongside a `readme.txt` which provides additional information.
 Pull the latest image from docker hub:
 ```shell
 docker pull mwolinska/qd4csp:latest
+docker tag mwolinska/qd4csp qd4csp 
+```
+
+Or you can build it locally from scratch:
+```shell
+docker build  . -t qd4csp 
 ```
 
 #### Run an Experiment
@@ -159,9 +165,6 @@ docker compose run reproduce-results
 You can also use the docker image interactively to run any of the commands described in the _poetry_ section above. 
 To do so first start the container:
 ```shell
-docker compose run qd4csp sh
+docker compose run qd4csp 
 ```
-Then use the container 
-```shell
-docker container list
-```
+Then use the container as you would a poetry environment. 

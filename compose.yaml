@@ -2,7 +2,8 @@ version: "3"
 
 services:
   qd4csp:
-    build: .
+    image:
+      qd4csp
     volumes:
       - ./experiments:/workdir/experiments
       - ./experiment_configs:/workdir/experiment_configs
@@ -12,7 +13,8 @@ services:
       - MP_API_KEY=${MP_API_KEY}
 
   map-elites:
-    build: .
+    image:
+      qd4csp
     volumes:
       - ./experiments:/workdir/experiments
       - ./experiment_configs:/workdir/experiment_configs
@@ -24,7 +26,8 @@ services:
     command: poetry run map-elites $EXP
 
   reproduce-results:
-    build: .
+    image:
+      qd4csp
     volumes:
       - ./experiments:/workdir/experiments
     stdin_open: true # docker run -i
