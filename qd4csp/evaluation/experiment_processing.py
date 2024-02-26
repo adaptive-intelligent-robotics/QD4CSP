@@ -9,6 +9,7 @@ from tqdm import tqdm
 
 from qd4csp.crystal.materials_data_model import MaterialProperties, \
     StartGenerators
+from qd4csp.evaluation.confidence_levels import ConfidenceLevels
 from qd4csp.evaluation.plotting.figure_manager import FigureManager
 from qd4csp.evaluation.plotting.plotter import CVTPlotting
 from qd4csp.evaluation.plotting.plotting_data_model import CVTPlottingData, \
@@ -312,6 +313,26 @@ class ExperimentProcessor:
                 plotting_from_archive,
                 plotting_from_mp,
             ) = symmetry_evaluation.matches_for_plotting(individuals_with_matches)
+
+            if self.save_structure_images:
+                individual_indices_with_unique_matches = [
+                    np.argwhere(archive.descriptors == el)[0][0]
+                    for el in plotting_from_mp.descriptors
+                ]
+
+                file_tags = [
+                    plotting_from_mp.mp_references[i] + "_" +
+                    ConfidenceLevels.get_string(plotting_from_mp.confidence_levels[i]).lower().replace(" ", "")
+                    for i in range(len(plotting_from_mp.mp_references))
+                ]
+
+                symmetry_evaluation.save_structure_visualisations(
+                    archive=archive,
+                    structure_indices=individual_indices_with_unique_matches,
+                    directory_to_save=self.experiment_directory_path,
+                    file_tags=file_tags,
+                    save_primitive=True,
+                )
 
             report_statistic_summary_dict = (
                 symmetry_evaluation.write_report_summary_json(

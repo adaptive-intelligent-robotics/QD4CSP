@@ -22,7 +22,7 @@ class ArchiveStatistics(str, Enum):
             ArchiveStatistics.MEDIAN_FITNESS: ", eV/atom",
             ArchiveStatistics.FITNESS_5_PERCENTILE: ", eV/atom",
             ArchiveStatistics.FITNESS_95_PERCENTILE: ", eV/atom",
-            ArchiveStatistics.COVERAGE: ", \%",
+            ArchiveStatistics.COVERAGE: ", %",
             ArchiveStatistics.QD_SCORE: ", eV/atom",
         }
         return unit_dict[metric]

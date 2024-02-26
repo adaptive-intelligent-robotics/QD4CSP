@@ -36,7 +36,7 @@ def plot_all_metrics_and_cvt_for_experiment(
         experiment_directory_path=experiment_path
     )
 
-    experiment_processor.plot(annotate=annotate)
+    # experiment_processor.plot(annotate=annotate)
     experiment_processor.process_symmetry(
         archive_number=experiment_parameters.maximum_evaluations,
         annotate=annotate,
@@ -46,8 +46,7 @@ def plot_all_metrics_and_cvt_for_experiment(
 def plot_all_metrics_for_experiment_cli():
     parser = ArgumentParser()
     parser.add_argument(
-        "-e",
-        "--experiment",
+        "experiment",
         help="Path to experiment that requires plotting."
     )
 
@@ -55,19 +54,19 @@ def plot_all_metrics_for_experiment_cli():
         "-a",
         "--annotate",
         help="Optional. Annotate plots True / False.",
-        default="False",
+        default=False,
     )
 
     parser.add_argument(
         "-s",
         "--save_structures",
         help="Optional. Save structure images True / False",
-        default="False",
+        default=False,
     )
 
     args = parser.parse_args()
     plot_all_metrics_and_cvt_for_experiment(
         experiment_path=Path(args.experiment),
         annotate=args.annotate,
-        save_structure_images=args.save_structures
+        save_structure_images=args.save_structures,
     )

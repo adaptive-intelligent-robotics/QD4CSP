@@ -25,6 +25,7 @@ from qd4csp.evaluation.confidence_levels import ConfidenceLevels
 from qd4csp.evaluation.plotting.plotting_data_model import PlottingMode, \
     PlottingMatches
 from qd4csp.map_elites.archive import Archive
+from qd4csp.utils.docker import environment_is_docker
 from qd4csp.utils.get_mpi_structures import get_all_materials_with_formula
 
 
@@ -64,8 +65,11 @@ class StructureEvaluation:
             recalculate=False,
         )
         self.enable_structure_visualiser = enable_structure_visualiser
-        if enable_structure_visualiser:
-            self.structure_viewer = StructureVis(show_polyhedron=False, show_bonds=True)
+        if self.enable_structure_visualiser:
+            if environment_is_docker():
+                self.structure_viewer = None
+            else:
+                self.structure_viewer = StructureVis(show_polyhedron=False, show_bonds=True)
         else:
             self.structure_viewer = None
         self.structure_matcher = StructureMatcher()
@@ -208,7 +212,7 @@ class StructureEvaluation:
         directory_to_save: pathlib.Path,
         file_tags: List[str],
         save_primitive: bool = False,
-    ) -> str:
+    ) -> Optional[str]:
         primitive_string = "_primitive" if save_primitive else ""
         filename = None
         for i, individual_index in enumerate(structure_indices):
@@ -223,7 +227,7 @@ class StructureEvaluation:
             individual_confid = archive.individuals[individual_index].info["confid"]
 
             filename = f"ind_{archive.centroid_ids[individual_index]}_{file_tags[i]}_{individual_confid}{primitive_string}"
-            if self.enable_structure_visualiser:
+            if self.enable_structure_visualiser and not environment_is_docker():
                 self.structure_viewer.set_structure(individual_as_structure)
                 self.structure_viewer.write_image(
                     str(directory_to_save / f"{filename}.png" ),
@@ -643,7 +647,6 @@ class StructureEvaluation:
             json.dump(summary_dict, file)
         return summary_dict
 
-
     def _get_maximum_confidence_for_centroid_id(
         self, centroid_indices_to_check: np.ndarray, plotting_matches: PlottingMatches
     ):
@@ -699,13 +702,13 @@ class StructureEvaluation:
             distance_to_known_structure = 1
         return distance_to_known_structure
 
-    def quick_view_structure(self, archive: Archive, individual_index: int):
-        if not self.enable_structure_visualiser:
-            return None
-        else:
-            structure = AseAtomsAdaptor.get_structure(archive.individuals[individual_index])
-            self.structure_viewer.set_structure(structure)
-            self.structure_viewer.show()
+    # def quick_view_structure(self, archive: Archive, individual_index: int):
+    #     if not self.enable_structure_visualiser:
+    #         return None
+    #     else:
+    #         structure = AseAtomsAdaptor.get_structure(archive.individuals[individual_index])
+    #         self.structure_viewer.set_structure(structure)
+    #         self.structure_viewer.show()
 
     def gif_centroid_over_time(
         self,
@@ -813,3 +816,7 @@ class StructureEvaluation:
             int(limits[0][2]),
             int(limits[1][2]),
         )
+
+
+if __name__ == '__main__':
+    StructureEvaluation()

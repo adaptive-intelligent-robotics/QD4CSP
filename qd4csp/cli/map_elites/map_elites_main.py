@@ -164,9 +164,9 @@ def main(
 def run_map_elites_experiment():
     parser = ArgumentParser()
     parser.add_argument(
-        "-c",
-        "--config",
+        "config",
         help="Path to configuration file relative to your location.",
+        nargs="?",
         default="experiment_configs/demo.json",
         type=str,
     )

@@ -35,5 +35,3 @@ COPY qd4csp /workdir/qd4csp
 COPY mp_reference_analysis /workdir/mp_reference_analysis
 
 RUN poetry install --without dev
-
-#ENTRYPOINT ["poetry", "shell"]
